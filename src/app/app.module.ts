@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {PublishersComponent} from './components/publishers/publishers.component';
 import {PublisherDetailsComponent} from './components/publisher-details/publisher-details.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MessagesComponent } from './components/messages/messages.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
