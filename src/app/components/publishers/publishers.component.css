@@ -1,0 +1,25 @@
+.publishers {
+  list-style-type: none;
+}
+
+.publishers li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: aliceblue;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+
+.publishers li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+
+.publishers li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}

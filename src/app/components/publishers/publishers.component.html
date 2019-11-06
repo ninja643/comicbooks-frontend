@@ -1,0 +1,8 @@
+<h2>Available publishers</h2>
+<ul class="publishers">
+  <li *ngFor="let publisher of publishers"
+      [class.selected]="publisher === selectedPublisher"
+      (click)="onSelect(publisher)">{{publisher.name}}</li>
+</ul>
+
+<app-publisher-details [publisher]="selectedPublisher"></app-publisher-details>
