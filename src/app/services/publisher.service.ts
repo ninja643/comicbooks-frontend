@@ -14,7 +14,7 @@ export class PublisherService {
 
   getPublishers(): Observable<Publisher[]> {
     // TODO: send the message _after_ fetching the data
-    this.messageService.add("PublisherService: fetched publishers");
+    this.messageService.add('PublisherService: fetched publishers');
     return of(PUBLISHERS);
   }
 }
