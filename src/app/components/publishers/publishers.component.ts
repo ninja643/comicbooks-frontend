@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Publisher} from '../../model/publisher';
 import {PublisherService} from '../../services/publisher.service';
+import {MessagesService} from '../../services/util/messages.service';
 
 @Component({
   selector: 'app-publishers',
@@ -12,7 +13,7 @@ export class PublishersComponent implements OnInit {
   publishers: Publisher[];
   selectedPublisher: Publisher;
 
-  constructor(private publisherService: PublisherService) {
+  constructor(private publisherService: PublisherService, private messageService: MessagesService) {
   }
 
   ngOnInit() {
@@ -25,6 +26,9 @@ export class PublishersComponent implements OnInit {
   }
 
   onSelect(publisher: Publisher) {
-    this.selectedPublisher = publisher;
+    if (this.selectedPublisher !== publisher) {
+      this.messageService.add('Selected publisher ' + publisher.name);
+      this.selectedPublisher = publisher;
+    }
   }
 }
