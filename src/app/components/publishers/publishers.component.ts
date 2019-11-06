@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PUBLISHERS} from '../../mock-data/mock-publishers';
 import {Publisher} from '../../model/publisher';
+import {PublisherService} from '../../services/publisher.service';
 
 @Component({
   selector: 'app-publishers',
@@ -9,13 +9,19 @@ import {Publisher} from '../../model/publisher';
 })
 export class PublishersComponent implements OnInit {
 
-  publishers = PUBLISHERS;
+  publishers: Publisher[];
   selectedPublisher: Publisher;
 
-  constructor() {
+  constructor(private publisherService: PublisherService) {
   }
 
   ngOnInit() {
+    this.getPublishers();
+  }
+
+  getPublishers(): void {
+    this.publisherService.getPublishers()
+      .subscribe(publishers => this.publishers = publishers);
   }
 
   onSelect(publisher: Publisher) {
