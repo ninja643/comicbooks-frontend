@@ -11,7 +11,6 @@ import {MessagesService} from '../../services/util/messages.service';
 export class PublishersComponent implements OnInit {
 
   publishers: Publisher[];
-  selectedPublisher: Publisher;
 
   constructor(private publisherService: PublisherService, private messageService: MessagesService) {
   }
@@ -23,12 +22,5 @@ export class PublishersComponent implements OnInit {
   getPublishers(): void {
     this.publisherService.getPublishers()
       .subscribe(publishers => this.publishers = publishers);
-  }
-
-  onSelect(publisher: Publisher) {
-    if (this.selectedPublisher !== publisher) {
-      this.messageService.add('Selected publisher ' + publisher.name);
-      this.selectedPublisher = publisher;
-    }
   }
 }

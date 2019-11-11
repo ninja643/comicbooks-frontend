@@ -18,4 +18,9 @@ export class PublisherService {
       () => this.messageService.add('PublisherService: fetched publishers')
     ));
   }
+
+  getPublisher(id: number): Observable<Publisher> {
+    this.messageService.add(`PublisherService: fetching publisher id=${id}`);
+    return of(PUBLISHERS.find(publisher => publisher.id === id));
+  }
 }
