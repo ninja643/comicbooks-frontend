@@ -1,0 +1,11 @@
+{
+  "/publisher/*": {
+    "target": "http://localhost:8080/comicbookserver_war_exploded/services/rest/publisher",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/publisher" : ""
+    },
+    "logLevel": "debug"
+  }
+}

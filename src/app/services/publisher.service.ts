@@ -4,23 +4,33 @@ import {PUBLISHERS} from '../mock-data/mock-publishers';
 import {Observable, of} from 'rxjs';
 import {MessagesService} from './util/messages.service';
 import {tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublisherService {
 
-  constructor(private messageService: MessagesService) {
+  private publishersUrl = '/publisher';
+
+  constructor(
+    private httpClient: HttpClient,
+    private messageService: MessagesService) {
   }
 
   getPublishers(): Observable<Publisher[]> {
-    return of(PUBLISHERS).pipe(tap(
-      () => this.messageService.add('PublisherService: fetched publishers')
-    ));
+    // return of(PUBLISHERS).pipe(tap(
+    //   () => this.messageService.add('PublisherService: fetched publishers')
+    // ));
+    return this.httpClient.get<Publisher[]>(this.publishersUrl);
   }
 
   getPublisher(id: number): Observable<Publisher> {
-    this.messageService.add(`PublisherService: fetching publisher id=${id}`);
+    this.log(`fetching publisher id=${id}`);
     return of(PUBLISHERS.find(publisher => publisher.id === id));
+  }
+
+  private log(message: string): void {
+    this.messageService.add(`PublisherService: ${message}`);
   }
 }
