@@ -1,0 +1,13 @@
+@import 'variables';
+
+:host {
+    nav {
+        background-color: $navigation-bg-color !important;
+        .nav-link {
+            color: $navigation-link-color;
+            &.active {
+                color: $navigation-active-link-color;
+            }
+        }
+    }
+}
