@@ -24,14 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.scss"
+              "src/styles.css"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/sass"
-              ]
-            },
             "scripts": []
           },
           "configurations": {
@@ -95,8 +89,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/variables.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -127,12 +120,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "comicbooks-frontend",
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "scss"
-    }
-  }
+    }},
+  "defaultProject": "comicbooks-frontend"
 }

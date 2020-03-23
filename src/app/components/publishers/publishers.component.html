@@ -1,0 +1,6 @@
+<h2>Available publishers</h2>
+<ul class="publishers">
+  <li *ngFor="let publisher of publishers">
+    <a routerLink="/publisher-details/{{publisher.id}}"><span class="badge">{{publisher.name}}</span></a>
+  </li>
+</ul>

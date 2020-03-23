@@ -1,21 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {Publisher} from './model/publisher';
-import { PublishersComponent } from './components/publishers/publishers.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { ComicbooksComponent } from './components/comicbooks/comicbooks.component';
-import { ComicbookComponent } from './components/comicbook/comicbook.component';
-import { HeroComponent } from './components/hero/hero.component';
-import { PublisherComponent } from './components/publisher/publisher.component';
+import {PublishersComponent} from './components/publishers/publishers.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {PublisherDetailsComponent} from './components/publisher-details/publisher-details.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/comicbooks', pathMatch: 'full'},
-  {path: 'comicbooks', component: ComicbooksComponent},
-  {path: 'comicbook/:id', component: ComicbookComponent},
-  {path: 'heroes', component: HeroesComponent},
-  {path: 'hero/:id', component: HeroComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'publishers', component: PublishersComponent},
-  {path: 'publisher/:id', component: PublisherComponent}
+  {path: 'publisher-details/:id', component: PublisherDetailsComponent}
 ];
 
 @NgModule({

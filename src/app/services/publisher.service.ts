@@ -1,58 +1,52 @@
-import { Injectable } from '@angular/core';
-import { Publisher } from '../model/publisher';
-import { PUBLISHERS } from '../mock-data/mock-publishers';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { ComicbooksHttpClient } from './comicbooks-http-client';
-import { getById, saveById, deleteById } from '../mock-data/mock-common';
+import {Injectable} from '@angular/core';
+import {Publisher} from '../model/publisher';
+import {PUBLISHERS} from '../mock-data/mock-publishers';
+import {Observable, of} from 'rxjs';
+import {MessagesService} from './util/messages.service';
+import {catchError, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class PublisherService {
 
-	private publishersUrl = '/publisher';
+  private publishersUrl = '/publisher';
 
-	constructor(
-		private httpClient: ComicbooksHttpClient) {
-	}
+  constructor(
+    private httpClient: HttpClient,
+    private messageService: MessagesService) {
+  }
 
-	getPublishers(): Observable<Publisher[]> {
-		return of(PUBLISHERS.slice());
-		return this.httpClient.get<Publisher[]>(this.publishersUrl);
-	}
+  getPublishers(): Observable<Publisher[]> {
+    return this.httpClient.get<Publisher[]>(this.publishersUrl)
+      .pipe(
+        tap(_ => this.log('Fetched publishers')),
+        catchError(this.handleError<Publisher[]>('getPublishers', []))
+      );
+  }
 
-	getPublisher(id: number): Observable<Publisher> {
-		return of(getById<Publisher>(PUBLISHERS, id));
-		const url = `${this.publishersUrl}/${id}`;
+  getPublisher(id: number): Observable<Publisher> {
+    const url = `${this.publishersUrl}/${id}`;
 
-		return this.httpClient.get<Publisher>(url);
-	}
+    return this.httpClient.get<Publisher>(url)
+      .pipe(
+        tap(_ => this.log(`fetched publisher id=${id}`)),
+        catchError(result => this.handleError<Publisher>(`getPublisher id=${id}`, result))
+      );
+  }
 
-	savePublisher(publisher: Publisher): Observable<Publisher> {
-		return of(saveById<Publisher>(PUBLISHERS, publisher));
-		return this.httpClient.post(this.publishersUrl, publisher);
-	}
+  private log(message: string): void {
+    this.messageService.add(`PublisherService: ${message}`);
+  }
 
-	deletePublisher(publisherId: number): Observable<void> {
-		return of(deleteById<Publisher>(PUBLISHERS, publisherId));
-		return this.httpClient.delete(`${this.publishersUrl}/${publisherId}`);
-	}
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
 
-	// private log(message: string): void {
-	//   // this.messageService.add(`PublisherService: ${message}`);
-	// }
+      this.log(`${operation} failed: ${error.message}`);
 
-	// private handleError<T>(operation = 'operation', result?: T) {
-	//   return (error: any): Observable<T> => {
-	//     console.error(error);
-
-	//     this.log(`${operation} failed: ${error.message}`);
-
-	//     return of(result as T);
-	//   };
-	// }
-
-	// TODO da napravim sistem za handlovanje gresaka
+      return of(result as T);
+    };
+  }
 }
