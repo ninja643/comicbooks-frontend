@@ -11,11 +11,11 @@ import { PublisherComponent } from './components/publisher/publisher.component';
 const routes: Routes = [
   {path: '', redirectTo: '/comicbooks', pathMatch: 'full'},
   {path: 'comicbooks', component: ComicbooksComponent},
-  {path: 'comicbook/:id', component: ComicbookComponent},
+  {path: 'comicbook/:comicbookId', component: ComicbookComponent},
   {path: 'heroes', component: HeroesComponent},
-  {path: 'hero/:id', component: HeroComponent},
+  {path: 'hero/:heroId', component: HeroComponent},
   {path: 'publishers', component: PublishersComponent},
-  {path: 'publisher/:id', component: PublisherComponent}
+  {path: 'publisher/:publisherId', component: PublisherComponent}
 ];
 
 @NgModule({

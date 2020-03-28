@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    
+    .front-page-image {
+        height: 400px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+}

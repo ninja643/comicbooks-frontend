@@ -6,5 +6,4 @@ export class ExecutePipe implements PipeTransform {
   transform(functionToExecute: (...args: any[]) => any, ...args: any[]): any {
     return functionToExecute(...args);
   }
-  
 }

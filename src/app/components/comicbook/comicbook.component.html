@@ -1,0 +1,29 @@
+<div class="col-8 offset-2 col-lg-5 offset-lg-0">
+    <div class="front-page-image mr-2" [background-image]="comicbookForm.controls.frontPageUrl.value"></div>
+</div>
+
+<form [formGroup]="comicbookForm" class="col-10 offset-1 col-lg-7 offset-lg-0">
+    <div class="form-group">
+        <label for="titleInput">Title</label>
+        <input formControlName="title" type="text" class="form-control" id="titleInput">
+    </div>
+
+    <div class="form-group">
+        <label for="numberInput">Number</label>
+        <input formControlName="number" type="text" class="form-control" id="numberInput">
+    </div>
+
+    <div class="form-group">
+        <label>Publisher</label>
+        <dropdown-select formControlName="publisher" [items]="publishers" displayPath="name" searchEnabled=true
+            [trackBy]="defaultTrackBy">
+        </dropdown-select>
+    </div>
+
+    <div class="form-group">
+        <label>Heroes</label>
+        <dropdown-select formControlName="heroes" [items]="heroes" displayPath="name" searchEnabled=true
+            multiselection=true [trackBy]="defaultTrackBy">
+        </dropdown-select>
+    </div>
+</form>

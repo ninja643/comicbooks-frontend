@@ -24,7 +24,7 @@ export class ComicbooksComponent {
     }
 
     openComicbook = (comicbook: Comicbook): Promise<any> => {
-        return this.router.navigate(['/', RouterLinks.COMICBOOK, comicbook.id]);
+        return this.router.navigate(['/', RouterLinks.COMICBOOK, comicbook.id], {state: {comicbook: comicbook}});
     }
 
     comicbookTrackBy = (index: number, comicbook: Comicbook): number => {
@@ -49,12 +49,17 @@ export class ComicbooksComponent {
     private generateComicbookColumns(): void {
         this.comicbookColumns = [
             {
-                id: 'name',
-                headerText: 'Name'
+                id: 'title',
+                headerText: 'Title'
             },
             {
-                id: 'id',
-                headerText: 'ID'
+                id: 'number',
+                headerText: 'Number'
+            },
+            {
+                id: 'publisher',
+                headerText: 'Publisher',
+                contentDisplayPath: 'publisher.name'
             }
         ]
     }

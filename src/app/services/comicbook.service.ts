@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Publisher} from '../model/publisher';
-import {PUBLISHERS} from '../mock-data/mock-publishers';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';

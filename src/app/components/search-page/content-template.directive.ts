@@ -1,7 +1,7 @@
 import { Directive, TemplateRef, Input } from '@angular/core';
 
 @Directive({
-    selector: 'content-template'
+    selector: '[content-template]'
   })
   export class ContentTemplate  {
 

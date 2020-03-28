@@ -1,0 +1,19 @@
+<div class="dropdown">
+	<button class="form-control dropdown-toggle text-left" (click)="dropdownToggled()" type="button"
+		[disabled]="disabled" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		{{getButtonDisplayText | execute : selectedValue}}
+	</button>
+
+	<div class="dropdown-menu w-100 overflow-auto" aria-labelledby="dropdownMenuButton">
+		<div *ngIf="searchEnabled" class="input-group mb-3 px-2">
+			<input type="text" [ngModel]="filter" (ngModelChange)="filter = $event; filterItems()" class="form-control"
+				[placeholder]="searchPlaceholderText">
+		</div>
+
+		<button *ngFor="let item of filteredItems; trackBy: selectorItemTrackBy" class="dropdown-item form-check"
+			[class.active]="item.selected" (click)="toggleItem(item); multiselection && $event.stopPropagation()">
+			<input *ngIf="multiselection" type="checkbox" class="form-check-input" [ngModel]="item.selected">
+			{{getDisplayText | execute : item.value }}
+		</button>
+	</div>
+</div>

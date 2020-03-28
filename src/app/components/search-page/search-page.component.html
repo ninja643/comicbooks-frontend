@@ -23,8 +23,8 @@
         <tbody>
             <tr *ngFor="let item of items; trackBy: itemTrackBy" (click)="onRowClicked(item)"
                 [class.cursor-pointer]="rowClickedFn">
-                <td *ngFor="let column of columns; trackBy: columnTrackBy" (click)="onCellClicked($event, item, column)"
-                    [class.cursor-pointer]="column.onContentCellClicked">
+                <td *ngFor="let column of columns; trackBy: columnTrackBy" class="align-middle"
+                    (click)="onCellClicked($event, item, column)" [class.cursor-pointer]="column.onContentCellClicked">
                     <ng-container
                         *ngTemplateOutlet="!column.contentTemplate ? defaultContentTemplate : column.contentTemplate; context: {$implicit: item}">
                     </ng-container>
