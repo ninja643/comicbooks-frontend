@@ -30,9 +30,9 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
 
     allItems: SelectorItem[] = [];
     filteredItems: SelectorItem[] = [];
+    filter: string;
+    selectedValue: any;
 
-    protected selectedValue: any;
-    protected filter: string;
     protected onChange: (value: any) => void;
     protected onTouched: () => void;
 
@@ -43,7 +43,18 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
         }
     }
 
-    protected toggleItem(selectorItem: SelectorItem): void {
+    filterItems(): void {
+        if (!this.filter) {
+            this.filteredItems = this.allItems;
+            return;
+        }
+
+        this.filteredItems = this.allItems.filter(item => {
+            return this.getDisplayText(item.value).toLowerCase().includes(this.filter.toLowerCase());
+        });
+    }
+
+    toggleItem(selectorItem: SelectorItem): void {
         if (this.multiselection) {
             selectorItem.selected = !selectorItem.selected;
         }
@@ -60,25 +71,13 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
         this.selectedValueChanged();
     }
 
-    protected getButtonDisplayText = (selectedValue: any): string => {
-        if (!selectedValue) {
-            return this.buttonPlaceholderText || '';
-        }
-        if (this.multiselection) {
-            return (<any[]>selectedValue).reduce(
-                (previousValue: string, item: any) => (previousValue ? previousValue + ', ' : previousValue) + this.getDisplayText(item),
-                '');
-        }
-        return this.getDisplayText(selectedValue);
-    }
-
-    protected dropdownToggled(): void {
+    dropdownToggled(): void {
         if (this.onTouched) {
             this.onTouched();
         }
     }
 
-    protected getDisplayText = (item: any): string => {
+    getDisplayText = (item: any): string => {
         if (this.displayPath) {
             const segments: string[] = this.displayPath.split('.');
             let itemProperty = item;
@@ -92,7 +91,19 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
         return '';
     }
 
-    protected selectorItemTrackBy = (index: number, item: SelectorItem): any => {
+    getButtonDisplayText = (selectedValue: any): string => {
+        if (!selectedValue) {
+            return this.buttonPlaceholderText || '';
+        }
+        if (this.multiselection) {
+            return (<any[]>selectedValue).reduce(
+                (previousValue: string, item: any) => (previousValue ? previousValue + ', ' : previousValue) + this.getDisplayText(item),
+                '');
+        }
+        return this.getDisplayText(selectedValue);
+    }
+
+    selectorItemTrackBy = (index: number, item: SelectorItem): any => {
         return this.trackBy(index, item.value);
     }
 
@@ -132,17 +143,6 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
         if (this.onChange) {
             this.onChange(this.selectedValue);
         }
-    }
-
-    protected filterItems(): void {
-        if (!this.filter) {
-            this.filteredItems = this.allItems;
-            return;
-        }
-
-        this.filteredItems = this.allItems.filter(item => {
-            return this.getDisplayText(item.value).toLowerCase().includes(this.filter.toLowerCase());
-        });
     }
 
     writeValue(obj: any): void {

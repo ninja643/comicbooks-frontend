@@ -9,5 +9,5 @@ export class BackgroundImageDirective {
         this.backgroundImage = 'url(' + value + ')';
     }
 
-    @HostBinding('style.background-image') private backgroundImage: string;
+    @HostBinding('style.background-image') backgroundImage: string;
 }

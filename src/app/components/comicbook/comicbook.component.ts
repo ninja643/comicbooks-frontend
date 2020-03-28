@@ -24,6 +24,7 @@ export class ComicbookComponent {
     set comicbook(value: Comicbook) {
         this._comicbook = value;
         this.comicbookForm.reset(this.makeFormValue(value));
+        this.comicbookForm.disable();
     }
     get comicbook(): Comicbook {
         return this._comicbook;
