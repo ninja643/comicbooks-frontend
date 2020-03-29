@@ -8,6 +8,7 @@ import { Hero } from '../model/hero';
 import { Comicbook } from '../model/comicbook';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
 import { getById, saveById, deleteById } from '../mock-data/mock-common';
+import { SearchParameters } from '../components/search-page/search-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class ComicbookService {
     private httpClient: ComicbooksHttpClient) {
   }
 
-  getComicbooks(): Observable<Comicbook[]> {
+  getComicbooks(searchParameters: SearchParameters): Observable<Comicbook[]> {
     return new Observable(subscriber => {
       setTimeout(() => {
         subscriber.next(COMICBOOKS.slice());

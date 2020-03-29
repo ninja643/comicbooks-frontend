@@ -6,6 +6,8 @@ import { HeaderTemplate } from './header-template.directive';
 import { ContentTemplate } from './content-template.directive';
 import { isNullOrUndefined } from 'util';
 import { LoaderStatus } from 'src/app/common/loader-status';
+import { ButtonInfo } from 'src/app/common/button-info';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 export interface ColumnDefinition {
     id: string;
@@ -24,6 +26,15 @@ export interface RowClicked {
     item: any;
 }
 
+export class SearchParameters {
+    constructor(public page: number = 1,
+        public pageSize: number = 10,
+        public collectionSize: number = 1,
+        public searchText: string = '',
+        public pageQueryParamKey?: string,
+        public searchTextQueryParamKey?: string) { }
+}
+
 @Component({
     selector: 'search-page',
     templateUrl: 'search-page.component.html',
@@ -33,6 +44,7 @@ export class SearchPageComponent {
 
     @Input() searchEnabled: boolean;
     @Input() searchPlaceholderText: string = "Search";
+    @Input() addNewItemButtonInfo: ButtonInfo;
 
     @Input() items: any[] = [];
     @Input() columns: ColumnDefinition[] = [];
@@ -40,26 +52,28 @@ export class SearchPageComponent {
     @Input() rowClickedFn: (item: any) => Promise<any>;
     @Input() itemTrackBy: (index: number, item: any) => any = (index: number, item: any) => JSON.stringify(item);
 
-    @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+    @Input() searchParameters: SearchParameters = new SearchParameters();
+    @Output() searchParametersChange: EventEmitter<SearchParameters> = new EventEmitter<SearchParameters>();
 
     private _headerTemplates: QueryList<HeaderTemplate>;
     @ContentChildren(HeaderTemplate) set headerTemplates(value: QueryList<HeaderTemplate>) {
         this._headerTemplates = value;
         this.populateHeaderTemplates();
-    } 
+    }
 
     private _contentTemplates: QueryList<ContentTemplate>;
     @ContentChildren(ContentTemplate) set contentTemplates(value: QueryList<ContentTemplate>) {
         this._contentTemplates = value;
         this.populateContentTemplates();
-    } 
+    }
 
     searchText: string;
     loaderStatus: LoaderStatus = new LoaderStatus();
 
-    private lastEmitedSearchText: string;
-
-    constructor() {
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+        this.activatedRoute.queryParams.subscribe({
+            next: (params: Params) => this.updateSearchParametersBasedOnQueryParams(params)
+        })
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -73,13 +87,38 @@ export class SearchPageComponent {
         if (showLoaderChange && !(isNullOrUndefined(showLoaderChange.previousValue) && !showLoaderChange.currentValue)) {
             this.loaderStatus.updateVisibility(this.showLoader);
         }
+
+        const searchParametersChange: SimpleChange = changes['searchParameters'];
+        if (searchParametersChange) {
+            this.searchText = this.searchParameters.searchText;
+            if (searchParametersChange.firstChange) {
+                this.updateSearchParametersBasedOnQueryParams(this.activatedRoute.snapshot.queryParams);
+            }
+            else {
+                this.updateQueryParams(true);
+            }
+        }
     }
 
-    search(): void {
-        if (this.searchText != this.lastEmitedSearchText) {
-            this.onSearch.emit(this.searchText);
-            this.lastEmitedSearchText = this.searchText;
+    searchByText(): void {
+        if (this.searchText != this.searchParameters.searchText) {
+            this.searchParameters = {
+                ...this.searchParameters,
+                page: 1,
+                searchText: this.searchText
+            };
+            this.updateQueryParams(false);
+            this.searchParametersChange.emit(this.searchParameters);
         }
+    }
+
+    changePage(page: number): void {
+        this.searchParameters = {
+            ...this.searchParameters,
+            page: page
+        };
+        this.updateQueryParams(false);
+        this.searchParametersChange.emit(this.searchParameters);
     }
 
     columnTrackBy(index: number, column: ColumnDefinition): string {
@@ -93,7 +132,7 @@ export class SearchPageComponent {
             try {
                 toReturn = toReturn[path];
             }
-            catch(exception) {
+            catch (exception) {
                 return;
             }
         })
@@ -114,7 +153,43 @@ export class SearchPageComponent {
             this.loaderStatus.showLoader();
             column.onContentCellClicked(item)
                 .finally(() => this.loaderStatus.hideLoader());
-        } 
+        }
+    }
+
+    protected updateSearchParametersBasedOnQueryParams(queryParams: Params): void {
+        let areSearchParametersChanged: boolean;
+        if (this.searchParameters.searchTextQueryParamKey && queryParams[this.searchParameters.searchTextQueryParamKey] != this.searchParameters.searchText) {
+            this.searchParameters.searchText = queryParams[this.searchParameters.searchTextQueryParamKey];
+            this.searchText = this.searchParameters.searchText;
+            areSearchParametersChanged = true;
+        }
+        if (this.searchParameters.pageQueryParamKey && queryParams[this.searchParameters.pageQueryParamKey] != this.searchParameters.page) {
+            this.searchParameters.page = queryParams[this.searchParameters.pageQueryParamKey];
+            areSearchParametersChanged = true;
+        }
+        if (areSearchParametersChanged) {
+            this.searchParametersChange.emit(this.searchParameters);
+        }
+    }
+
+    private updateQueryParams(replaceUrl: boolean): void {
+        const queryParams: Params = {};
+        if (this.searchParameters.searchTextQueryParamKey) {
+            queryParams[this.searchParameters.searchTextQueryParamKey] = this.searchParameters.searchText || null;
+        }
+        if (this.searchParameters.pageQueryParamKey) {
+            queryParams[this.searchParameters.pageQueryParamKey] = this.searchParameters.page || null;
+        }
+
+        this.router.navigate(
+            [],
+            {
+                relativeTo: this.activatedRoute,
+                queryParams: queryParams,
+                queryParamsHandling: 'merge',
+                replaceUrl: replaceUrl
+            }
+        );
     }
 
     private populateHeaderTemplates(): void {

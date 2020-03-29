@@ -21,6 +21,7 @@ import { ExecutePipe } from './common/execute.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
 import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DropdownSelectComponent } from './components/dropdown-select/dropdown-s
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbPaginationModule
   ],
   providers: [ComicbooksHttpClient],
   bootstrap: [AppComponent]

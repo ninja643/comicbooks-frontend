@@ -1,8 +1,11 @@
 export enum RouterLinks {
-    PUBLISHER = 'publisher',
-    PUBLISHERS = 'publishers',
-    HERO = 'hero',
-    HEROES = 'heroes',
-    COMICBOOK = 'comicbook',
-    COMICBOOKS = 'comicbooks'
+    Publisher = 'publisher',
+    Publishers = 'publishers',
+    NewPublisher = 'new-publisher',
+    Hero = 'hero',
+    Heroes = 'heroes',
+    NewHero = 'new-hero',
+    Comicbook = 'comicbook',
+    Comicbooks = 'comicbooks',
+    NewComicbook = 'new-comicbook'
 }

@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
     display: flex;
     
@@ -6,5 +8,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+        border: 1px solid $comicbook-image-border-color;
+        border-radius: 5px;
     }
 }

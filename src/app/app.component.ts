@@ -16,3 +16,4 @@ export class AppComponent {
 // 1. Da dodam logove, gde je kliknuto i da moze da se prikaze statistika
 // 2. da dodam loader
 // 3. Ne radi hamburger menu
+// 4. Da li treba neka validacija prilikom dodavanja novih stvari (da ne dozvolim dodavanje ako vec postoji)

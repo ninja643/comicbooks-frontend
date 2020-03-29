@@ -1,10 +1,19 @@
 <loader [busy]="loaderStatus.isLoaderVisible">
-    <div *ngIf="searchEnabled" class="input-group mb-3">
-        <input type="text" class="form-control" [(ngModel)]="searchText" [placeholder]="searchPlaceholderText">
-        <div class="input-group-append" (click)="search()">
-            <button class="input-group-text btn">
-                <i class="material-icons">search</i>
-            </button>
+    <div *ngIf="searchEnabled || addNewItemButtonInfo" class="d-flex justify-content-end">
+        <div class="input-group mb-3 flex-grow-1">
+            <ng-container *ngIf="searchEnabled">
+                <input type="text" class="form-control" [(ngModel)]="searchText" [placeholder]="searchPlaceholderText"
+                    (keyup.enter)="searchByText()">
+                <div class="input-group-append" (click)="searchByText()">
+                    <button class="input-group-text btn">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="addNewItemButtonInfo" class="ml-3">
+            <button (click)="addNewItemButtonInfo.execute()"
+                class="btn btn-primary text-nowrap">{{addNewItemButtonInfo.text}}</button>
         </div>
     </div>
     <table class="table table-striped">
@@ -41,4 +50,7 @@
             </tr>
         </tbody>
     </table>
+    <ngb-pagination class="d-flex justify-content-center" [page]="searchParameters.page"
+        [pageSize]="searchParameters.pageSize" [collectionSize]="searchParameters.collectionSize"
+        (pageChange)="changePage($event)"></ngb-pagination>
 </loader>

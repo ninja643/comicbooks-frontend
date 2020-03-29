@@ -1,6 +1,6 @@
 <search-page [searchEnabled]="true" [items]="comicbooks" [rowClickedFn]="openComicbook" [itemTrackBy]="comicbookTrackBy"
     [columns]="comicbookColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
-    (onSearch)="searchComicbooks($event)">
+    [addNewItemButtonInfo]="addNewComicbookButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchComicbooks($event)">
     <ng-template content-template="title" let-comicbook>
         <div class="d-flex align-items-center">
             <div class="front-page-image mr-2" [background-image]="comicbook.frontPageUrl"></div>

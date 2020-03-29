@@ -7,15 +7,19 @@ import { ComicbooksComponent } from './components/comicbooks/comicbooks.componen
 import { ComicbookComponent } from './components/comicbook/comicbook.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { PublisherComponent } from './components/publisher/publisher.component';
+import { RouterLinks } from './common/router-links';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/comicbooks', pathMatch: 'full'},
-  {path: 'comicbooks', component: ComicbooksComponent},
-  {path: 'comicbook/:comicbookId', component: ComicbookComponent},
-  {path: 'heroes', component: HeroesComponent},
-  {path: 'hero/:heroId', component: HeroComponent},
-  {path: 'publishers', component: PublishersComponent},
-  {path: 'publisher/:publisherId', component: PublisherComponent}
+  {path: '', redirectTo: `/${RouterLinks.Comicbooks}`, pathMatch: 'full'},
+  {path: `${RouterLinks.Comicbooks}`, component: ComicbooksComponent},
+  {path: `${RouterLinks.Comicbook}/:comicbookId`, component: ComicbookComponent},
+  {path: `${RouterLinks.NewComicbook}`, component: ComicbookComponent},
+  {path: `${RouterLinks.Heroes}`, component: HeroesComponent},
+  {path: `${RouterLinks.Hero}/:heroId`, component: HeroComponent},
+  {path: `${RouterLinks.NewHero}`, component: HeroComponent},
+  {path: `${RouterLinks.Publishers}`, component: PublishersComponent},
+  {path: `${RouterLinks.Publisher}/:publisherId`, component: PublisherComponent},
+  {path: `${RouterLinks.NewPublisher}`, component: PublisherComponent}
 ];
 
 @NgModule({
