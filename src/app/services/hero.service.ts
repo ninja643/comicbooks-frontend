@@ -58,6 +58,4 @@ export class HeroService {
     //     return of(result as T);
     //   };
     // }
-
-    // TODO da napravim sistem za handlovanje gresaka
 }

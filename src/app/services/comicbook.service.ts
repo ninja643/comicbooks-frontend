@@ -9,6 +9,8 @@ import { Comicbook } from '../model/comicbook';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
 import { getById, save, deleteById } from '../mock-data/mock-common';
 import { SearchParameters } from '../components/search-page/search-page.component';
+import { SearchResult } from '../model/search-results';
+import { SearchRequest } from '../model/search-request';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +23,27 @@ export class ComicbookService {
     private httpClient: ComicbooksHttpClient) {
   }
 
-  getComicbooks(searchParameters: SearchParameters): Observable<Comicbook[]> {
+  getComicbooks(searchParameters: SearchParameters): Observable<SearchResult<Comicbook>> {
     return new Observable(subscriber => {
       setTimeout(() => {
-        subscriber.next(COMICBOOKS.slice());
+        const t = {
+          offset: (searchParameters.page - 1) * searchParameters.pageSize,
+          count: searchParameters.pageSize,
+          totalCount: searchParameters.collectionSize,
+          searchText: searchParameters.searchText,
+          items: COMICBOOKS.slice().filter(x => x.title.toLowerCase().includes(searchParameters.searchText.toLowerCase()))
+        };
+        subscriber.next(t);
         subscriber.complete();
       }, 1500);
     })
-    return of(COMICBOOKS.slice());
-    return this.httpClient.get<Comicbook[]>(this.url);
+    const requestBody: SearchRequest = {
+      offset: (searchParameters.page - 1) * searchParameters.pageSize,
+      count: searchParameters.pageSize,
+      filterText: searchParameters.searchText
+    };
+    const url: string = `${this.url}/search`;
+    return this.httpClient.post<SearchResult<Comicbook>>(url, requestBody);
   }
 
   getComicbook(id: number): Observable<Comicbook> {
@@ -77,6 +91,4 @@ export class ComicbookService {
   //     return of(result as T);
   //   };
   // }
-
-  // TODO da napravim sistem za handlovanje gresaka
 }

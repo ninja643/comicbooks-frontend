@@ -9,8 +9,10 @@ import { HeroComponent } from './components/hero/hero.component';
 import { PublisherComponent } from './components/publisher/publisher.component';
 import { RouterLinks } from './common/router-links';
 
+const homeRoute: string = `/${RouterLinks.Comicbooks}`;
+
 const routes: Routes = [
-  {path: '', redirectTo: `/${RouterLinks.Comicbooks}`, pathMatch: 'full'},
+  {path: '', redirectTo: homeRoute, pathMatch: 'full'},
   {path: `${RouterLinks.Comicbooks}`, component: ComicbooksComponent},
   {path: `${RouterLinks.Comicbook}/:comicbookId`, component: ComicbookComponent},
   {path: `${RouterLinks.NewComicbook}`, component: ComicbookComponent},
@@ -19,7 +21,8 @@ const routes: Routes = [
   {path: `${RouterLinks.NewHero}`, component: HeroComponent},
   {path: `${RouterLinks.Publishers}`, component: PublishersComponent},
   {path: `${RouterLinks.Publisher}/:publisherId`, component: PublisherComponent},
-  {path: `${RouterLinks.NewPublisher}`, component: PublisherComponent}
+  {path: `${RouterLinks.NewPublisher}`, component: PublisherComponent},
+  {path: '**', redirectTo: homeRoute, pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ComicbooksHttpClient {
 
-    // TODO da napravim baseURl konfigurabilno
-    private baseUrl: string = '';
+    private baseUrl: string = environment.serviceUrl;
 
     constructor(private http: HttpClient) {
     }

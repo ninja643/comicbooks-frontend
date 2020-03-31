@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from "@angular/core";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Comicbook } from 'src/app/model/comicbook';
 import { ComicbookService } from 'src/app/services/comicbook.service';
 import { LoaderStatus } from 'src/app/common/loader-status';
@@ -10,6 +10,11 @@ import { Hero } from 'src/app/model/hero';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { HeroService } from 'src/app/services/hero.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { RouterLinks } from 'src/app/common/router-links';
+import { RoutingService } from 'src/app/common/routing.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationPopupComponent } from '../popups/confirmation/confirmation-popup.component';
+import { PopupResponseEnum } from '../popups/popup-response';
 
 @Component({
     templateUrl: 'comicbook.component.html',
@@ -42,7 +47,7 @@ export class ComicbookComponent {
         this._comicbook = value;
         this.comicbookForm.reset(this.makeFormValue(value));
         this.frontPageImage = value.frontPageImage ? value.frontPageImage.url : null;
-        this.editMode = false;
+        this.editMode = !value.id;
     }
     get comicbook(): Comicbook {
         return this._comicbook;
@@ -55,27 +60,34 @@ export class ComicbookComponent {
     }
 
     constructor(protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected routingService: RoutingService,
         protected comicbookService: ComicbookService,
         protected formBuilder: FormBuilder,
         protected publisherService: PublisherService,
         protected heroService: HeroService,
+        protected ngbModal: NgbModal,
         protected fileUploadService: FileUploadService,
         protected cdRef: ChangeDetectorRef) {
         this.initialize();
-
-        this.activatedRoute.params.subscribe(params => {
-            const comicbookId: number = params['comicbookId'];
-            if (comicbookId) {
-                this.comicbookId = +comicbookId;
-                const comicbook: Comicbook = window.history.state ? window.history.state.comicbook : null;
-                if (comicbook) {
-                    this.comicbook = comicbook;
+        if (this.router.url.includes(RouterLinks.NewComicbook)) {
+            this.comicbook = <Comicbook>{};
+        }
+        else {
+            this.activatedRoute.params.subscribe(params => {
+                const comicbookId: number = params['comicbookId'];
+                if (comicbookId) {
+                    this.comicbookId = +comicbookId;
+                    const comicbook: Comicbook = window.history.state ? window.history.state.comicbook : null;
+                    if (comicbook) {
+                        this.comicbook = comicbook;
+                    }
+                    else {
+                        this.patchComicbook();
+                    }
                 }
-                else {
-                    this.patchComicbook();
-                }
-            }
-        });
+            });
+        }
     }
 
     edit(): void {
@@ -83,26 +95,38 @@ export class ComicbookComponent {
     }
 
     delete(): void {
+        const modalRef = this.ngbModal.open(ConfirmationPopupComponent, { centered: true });
+        const popupInstance: ConfirmationPopupComponent = modalRef.componentInstance;
+        popupInstance.title = `Delete comicbook \"${this.comicbook.title}\"`;
+        popupInstance.content = `Are you sure you want to delete comicbook \"${this.comicbook.title}\"?`;
+        popupInstance.confirmButtonText = "Delete";
+        popupInstance.rejectButtonText = "Cancel";
+        modalRef.result.then(result => {
+            if (result == PopupResponseEnum.Confirm) {
+                this.loaderStatus.showLoader();
+                this.comicbookService.deleteComicbook(this.comicbook.id)
+                    .pipe(finalize(() => this.loaderStatus.hideLoader()))
+                    .subscribe(() => this.routingService.navigateToComicbooks());
+            }
+        })
         // TODO add popup confirmation
     }
 
     async save(): Promise<void> {
-        if (this.comicbookForm.untouched) {
-            this.comicbookForm.markAllAsTouched();
-        }
+        this.comicbookForm.markAllAsTouched();
         if (this.comicbookForm.invalid) {
             return;
         }
         this.loaderStatus.showLoader();
         const comicbookToSave: Comicbook = this.getComicbookFromForm();
         if (this.frontPageImageControl.value) {
-            comicbookToSave.frontPageImage = await this.fileUploadService.uploadFile(this.frontPageImageControl.value)
+            comicbookToSave.frontPageImage = await this.fileUploadService.uploadFile(this.frontPageImageControl.value, this.frontPageImage)
                 .pipe(first()).toPromise();
         }
         this.comicbookService.saveComicbook(comicbookToSave)
             .pipe(finalize(() => this.loaderStatus.hideLoader()))
             .subscribe({
-                next: (comicbook: Comicbook) => this.comicbook = comicbook
+                next: (comicbook: Comicbook) => this.routingService.navigateToComicbook(comicbook, true)
             });
     }
 
@@ -141,7 +165,7 @@ export class ComicbookComponent {
             heroes: []
         });
         this.comicbookForm.disable();
-        
+
         this.frontPageImageControl.valueChanges.subscribe({
             next: (file: File) => {
                 if (file) {

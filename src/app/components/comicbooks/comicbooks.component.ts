@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { ComicbookService } from 'src/app/services/comicbook.service';
 import { Comicbook } from 'src/app/model/comicbook';
-import { RouterLinks } from 'src/app/common/router-links';
 import { ColumnDefinition, SearchParameters } from '../search-page/search-page.component';
-import { Router } from '@angular/router';
 import { LoaderStatus } from 'src/app/common/loader-status';
 import { ButtonInfo } from 'src/app/common/button-info';
 import { finalize } from 'rxjs/operators';
+import { RoutingService } from 'src/app/common/routing.service';
+import { SearchResult } from 'src/app/model/search-results';
 
 @Component({
     templateUrl: 'comicbooks.component.html',
@@ -20,20 +20,20 @@ export class ComicbooksComponent {
     addNewComicbookButtonInfo: ButtonInfo = {
         text: "Add new comicbook",
         execute: () => {
-            this.router.navigate([RouterLinks.NewComicbook]);
+            this.routingService.navigateToNewComicbook();
         }
     }
     searchParameters: SearchParameters = new SearchParameters(1, 10, 100, '', 'page', 'filter');
 
     constructor(protected comicbookService: ComicbookService,
-        protected router: Router) {
+        protected routingService: RoutingService) {
         this.patchComicbooks();
 
         this.generateComicbookColumns();
     }
 
     openComicbook = (comicbook: Comicbook): Promise<any> => {
-        return this.router.navigate(['/', RouterLinks.Comicbook, comicbook.id], { state: { comicbook: comicbook } });
+        return this.routingService.navigateToComicbook(comicbook);
     }
 
     comicbookTrackBy = (index: number, comicbook: Comicbook): number => {
@@ -51,9 +51,12 @@ export class ComicbooksComponent {
             .pipe(finalize(() => this.searchPageLoaderStatus.hideLoader()))
             .subscribe({
                 // TODO handle error
-                next: (comicbooks: Comicbook[]) => {
-                    this.comicbooks = comicbooks;
-                    // TODO update search parameters
+                next: (result: SearchResult<Comicbook>) => {
+                    this.searchParameters = {
+                        ...this.searchParameters,
+                        collectionSize: result.totalCount
+                    };
+                    this.comicbooks = result.items;
                 }
             });
     }

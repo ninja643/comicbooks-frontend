@@ -1,13 +1,13 @@
 import { Component, Input, TemplateRef, EventEmitter, Output, ContentChild, QueryList, ContentChildren, SimpleChanges, SimpleChange } from "@angular/core";
 import { ComicbookService } from 'src/app/services/comicbook.service';
 import { Comicbook } from 'src/app/model/comicbook';
-import { RouterLinks } from 'src/app/common/router-links';
 import { HeaderTemplate } from './header-template.directive';
 import { ContentTemplate } from './content-template.directive';
 import { isNullOrUndefined } from 'util';
 import { LoaderStatus } from 'src/app/common/loader-status';
 import { ButtonInfo } from 'src/app/common/button-info';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RoutingService } from 'src/app/common/routing.service';
 
 export interface ColumnDefinition {
     id: string;
@@ -70,7 +70,8 @@ export class SearchPageComponent {
     searchText: string;
     loaderStatus: LoaderStatus = new LoaderStatus();
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(private activatedRoute: ActivatedRoute,
+        private routingService: RoutingService) {
         this.activatedRoute.queryParams.subscribe({
             next: (params: Params) => this.updateSearchParametersBasedOnQueryParams(params)
         })
@@ -158,13 +159,16 @@ export class SearchPageComponent {
 
     protected updateSearchParametersBasedOnQueryParams(queryParams: Params): void {
         let areSearchParametersChanged: boolean;
-        if (this.searchParameters.searchTextQueryParamKey && queryParams[this.searchParameters.searchTextQueryParamKey] != this.searchParameters.searchText) {
-            this.searchParameters.searchText = queryParams[this.searchParameters.searchTextQueryParamKey];
+        const searchTextQueryParam: string = queryParams[this.searchParameters.searchTextQueryParamKey];
+        if (!isNullOrUndefined(searchTextQueryParam) && searchTextQueryParam != this.searchParameters.searchText) {
+            this.searchParameters.searchText = searchTextQueryParam;
             this.searchText = this.searchParameters.searchText;
             areSearchParametersChanged = true;
         }
-        if (this.searchParameters.pageQueryParamKey && queryParams[this.searchParameters.pageQueryParamKey] != this.searchParameters.page) {
-            this.searchParameters.page = queryParams[this.searchParameters.pageQueryParamKey];
+
+        const pageQueryParam: number = queryParams[this.searchParameters.pageQueryParamKey];
+        if (!isNullOrUndefined(pageQueryParam) && pageQueryParam != this.searchParameters.page) {
+            this.searchParameters.page = pageQueryParam;
             areSearchParametersChanged = true;
         }
         if (areSearchParametersChanged) {
@@ -181,15 +185,7 @@ export class SearchPageComponent {
             queryParams[this.searchParameters.pageQueryParamKey] = this.searchParameters.page || null;
         }
 
-        this.router.navigate(
-            [],
-            {
-                relativeTo: this.activatedRoute,
-                queryParams: queryParams,
-                queryParamsHandling: 'merge',
-                replaceUrl: replaceUrl
-            }
-        );
+        this.routingService.updateQueryParams(queryParams, replaceUrl);
     }
 
     private populateHeaderTemplates(): void {

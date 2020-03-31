@@ -21,8 +21,10 @@ import { ExecutePipe } from './common/execute.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
 import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
-import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbPaginationModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
+import { InformationPopupComponent } from './components/popups/information/information-popup.component';
+import { ConfirmationPopupComponent } from './components/popups/confirmation/confirmation-popup.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { FileInputComponent } from './components/file-input/file-input.component
     LoaderComponent,
     BackgroundImageDirective,
     DropdownSelectComponent,
-    FileInputComponent
+    FileInputComponent,
+    InformationPopupComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,12 @@ import { FileInputComponent } from './components/file-input/file-input.component
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgbModalModule
+  ],
+  entryComponents: [
+    InformationPopupComponent,
+    ConfirmationPopupComponent
   ],
   providers: [ComicbooksHttpClient],
   bootstrap: [AppComponent]

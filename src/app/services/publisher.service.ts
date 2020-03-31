@@ -57,6 +57,4 @@ export class PublisherService {
 	//     return of(result as T);
 	//   };
 	// }
-
-	// TODO da napravim sistem za handlovanje gresaka
 }
