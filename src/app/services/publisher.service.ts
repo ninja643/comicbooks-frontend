@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
-import { getById, saveById, deleteById } from '../mock-data/mock-common';
+import { getById, save, deleteById } from '../mock-data/mock-common';
 import { PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4 } from '../mock-data/mock-publishers';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class PublisherService {
 	}
 
 	savePublisher(publisher: Publisher): Observable<Publisher> {
-		return of(saveById<Publisher>(this.temporaryHelper, publisher));
+		return of(save<Publisher>(this.temporaryHelper, publisher));
 		return this.httpClient.post(this.publishersUrl, publisher);
 	}
 

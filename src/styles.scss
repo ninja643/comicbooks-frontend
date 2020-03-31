@@ -54,3 +54,7 @@ body, input[type="text"], button {
 .dropdown-toggle:after { 
   content: none;
 }
+
+input.ng-invalid.ng-touched {
+  border-color: $invalid-control-border-color;
+}

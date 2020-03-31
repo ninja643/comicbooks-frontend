@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
 import { Hero } from '../model/hero';
-import { getById, saveById, deleteById } from '../mock-data/mock-common';
+import { getById, save, deleteById } from '../mock-data/mock-common';
 import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from '../mock-data/mock-heroes';
 
 @Injectable({
@@ -13,7 +13,7 @@ import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from '.
 })
 export class HeroService {
 
-    private heroUrl = '/hero';
+    private url = '/hero';
 
     constructor(
         private httpClient: ComicbooksHttpClient) {
@@ -25,24 +25,24 @@ export class HeroService {
 
     getHeroes(): Observable<Hero[]> {
         return of(this.temporary_getHeroes);
-        return this.httpClient.get<Hero[]>(this.heroUrl);
+        return this.httpClient.get<Hero[]>(this.url);
     }
 
     getHero(id: number): Observable<Hero> {
         return of(getById<Hero>(this.temporary_getHeroes, id));
-        const url = `${this.heroUrl}/${id}`;
+        const url = `${this.url}/${id}`;
 
         return this.httpClient.get<Hero>(url);
     }
 
     saveHero(hero: Hero): Observable<Hero> {
-        return of(saveById<Hero>(this.temporary_getHeroes, hero));
-        return this.httpClient.post(this.heroUrl, hero);
+        return of(save<Hero>(this.temporary_getHeroes, hero));
+        return this.httpClient.post(this.url, hero);
     }
 
     deleteHero(heroId: number): Observable<void> {
         return of(deleteById<Hero>(this.temporary_getHeroes, heroId));
-        return this.httpClient.delete(`${this.heroUrl}/${heroId}`);
+        return this.httpClient.delete(`${this.url}/${heroId}`);
     }
 
     // private log(message: string): void {

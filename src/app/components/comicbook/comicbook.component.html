@@ -1,29 +1,51 @@
-<div class="col-8 offset-2 col-lg-5 offset-lg-0">
-    <div class="front-page-image mr-2" [background-image]="comicbookForm.controls.frontPageUrl.value"></div>
-</div>
-
-<form [formGroup]="comicbookForm" class="col-10 offset-1 col-lg-7 offset-lg-0">
-    <div class="form-group">
-        <label for="titleInput">Title</label>
-        <input formControlName="title" type="text" class="form-control" id="titleInput">
+<loader [status]="loaderStatus">
+    <div class="d-flex justify-content-center mb-4">
+        <h2 *ngIf="comicbook?.title">Comicbook: {{comicbook.title}}</h2>
     </div>
 
-    <div class="form-group">
-        <label for="numberInput">Number</label>
-        <input formControlName="number" type="text" class="form-control" id="numberInput">
-    </div>
+    <form [formGroup]="comicbookForm" class="d-flex flex-wrap">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-5 offset-lg-0 mb-5">
+            <div class="front-page-image mb-2" [background-image]="frontPageImage"></div>
+            <file-input [class.invisible]="comicbookForm.controls.frontPageImage.disabled"
+                formControlName="frontPageImage" buttonText="Choose image" acceptTypes="image/*"></file-input>
+        </div>
 
-    <div class="form-group">
-        <label>Publisher</label>
-        <dropdown-select formControlName="publisher" [items]="publishers" displayPath="name" searchEnabled=true
-            [trackBy]="defaultTrackBy">
-        </dropdown-select>
-    </div>
+        <div class="col-12 col-md-10 offset-md-1 col-lg-7 offset-lg-0 mb-5">
+            <div class="form-group">
+                <label for="titleInput">Title</label>
+                <input formControlName="title" type="text" class="form-control" id="titleInput">
+            </div>
 
-    <div class="form-group">
-        <label>Heroes</label>
-        <dropdown-select formControlName="heroes" [items]="heroes" displayPath="name" searchEnabled=true
-            multiselection=true [trackBy]="defaultTrackBy">
-        </dropdown-select>
+            <div class="form-group">
+                <label for="numberInput">Number</label>
+                <input formControlName="number" type="text" class="form-control" id="numberInput">
+            </div>
+
+            <div class="form-group">
+                <label>Publisher</label>
+                <dropdown-select formControlName="publisher" [items]="publishers" displayPath="name" searchEnabled=true
+                    [trackBy]="defaultTrackBy">
+                </dropdown-select>
+            </div>
+
+            <div class="form-group">
+                <label>Heroes</label>
+                <dropdown-select formControlName="heroes" [items]="heroes" displayPath="name" searchEnabled=true
+                    multiselection=true [trackBy]="defaultTrackBy">
+                </dropdown-select>
+            </div>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-center">
+        <ng-container *ngIf="!editMode; else editModeButtons">
+            <button (click)="edit()" class="btn btn-primary text-nowrap mr-4">Edit</button>
+            <button (click)="delete()" class="btn btn-danger text-nowrap">Delete</button>
+        </ng-container>
+        <ng-template #editModeButtons>
+            <button (click)="save()" [disabled]="comicbookForm.touched && comicbookForm.invalid"
+                class="btn btn-primary text-nowrap mr-4">Save</button>
+            <button (click)="cancel()" class="btn btn-secondary text-nowrap">Cancel</button>
+        </ng-template>
     </div>
-</form>
+</loader>

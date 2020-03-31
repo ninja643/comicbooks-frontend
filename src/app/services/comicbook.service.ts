@@ -7,7 +7,7 @@ import { ComicbooksHttpClient } from './comicbooks-http-client';
 import { Hero } from '../model/hero';
 import { Comicbook } from '../model/comicbook';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
-import { getById, saveById, deleteById } from '../mock-data/mock-common';
+import { getById, save, deleteById } from '../mock-data/mock-common';
 import { SearchParameters } from '../components/search-page/search-page.component';
 
 @Injectable({
@@ -15,7 +15,7 @@ import { SearchParameters } from '../components/search-page/search-page.componen
 })
 export class ComicbookService {
 
-  private comicbookUrl = '/comicbook';
+  private url = '/comicbook';
 
   constructor(
     private httpClient: ComicbooksHttpClient) {
@@ -25,27 +25,43 @@ export class ComicbookService {
     return new Observable(subscriber => {
       setTimeout(() => {
         subscriber.next(COMICBOOKS.slice());
+        subscriber.complete();
       }, 1500);
     })
     return of(COMICBOOKS.slice());
-    return this.httpClient.get<Comicbook[]>(this.comicbookUrl);
+    return this.httpClient.get<Comicbook[]>(this.url);
   }
 
   getComicbook(id: number): Observable<Comicbook> {
-    return of(getById<Comicbook>(COMICBOOKS, id));
-    const url = `${this.comicbookUrl}/${id}`;
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(getById<Comicbook>(COMICBOOKS, id));
+        subscriber.complete();
+      }, 1500);
+    })
+    const url = `${this.url}/${id}`;
 
     return this.httpClient.get<Comicbook>(url);
   }
 
   saveComicbook(comicbook: Comicbook): Observable<Comicbook> {
-    return of(saveById<Comicbook>(COMICBOOKS, comicbook));
-    return this.httpClient.post(this.comicbookUrl, comicbook);
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(save<Comicbook>(COMICBOOKS, comicbook));
+        subscriber.complete();
+      }, 1500);
+    })
+    return this.httpClient.post(this.url, comicbook);
   }
 
   deleteComicbook(comicbookId: number): Observable<void> {
-    return of(deleteById<Comicbook>(COMICBOOKS, comicbookId));
-    return this.httpClient.delete(`${this.comicbookUrl}/${comicbookId}`);
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(deleteById<Comicbook>(COMICBOOKS, comicbookId));
+        subscriber.complete();
+      }, 1500);
+    })
+    return this.httpClient.delete(`${this.url}/${comicbookId}`);
   }
 
   // private log(message: string): void {

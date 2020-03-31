@@ -1,4 +1,5 @@
 import { Component, Input, HostListener } from '@angular/core';
+import { LoaderStatus } from 'src/app/common/loader-status';
 
 @Component({
     selector: 'loader',
@@ -7,10 +8,10 @@ import { Component, Input, HostListener } from '@angular/core';
 })
 export class LoaderComponent {
 
-    @Input() busy: boolean;
+    @Input() status: LoaderStatus;
 
     @HostListener('document:keydown', ['$event']) handleKeyboardEvent(event: KeyboardEvent) {
-        if (this.busy) {
+        if (this.status.isLoaderVisible) {
             event.preventDefault();
             event.stopPropagation();
         }

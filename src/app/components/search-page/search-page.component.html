@@ -1,4 +1,4 @@
-<loader [busy]="loaderStatus.isLoaderVisible">
+<loader [status]="loaderStatus">
     <div *ngIf="searchEnabled || addNewItemButtonInfo" class="d-flex justify-content-end">
         <div class="input-group mb-3 flex-grow-1">
             <ng-container *ngIf="searchEnabled">

@@ -22,6 +22,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
 import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import { FileInputComponent } from './components/file-input/file-input.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
     ExecutePipe,
     LoaderComponent,
     BackgroundImageDirective,
-    DropdownSelectComponent
+    DropdownSelectComponent,
+    FileInputComponent
   ],
   imports: [
     BrowserModule,

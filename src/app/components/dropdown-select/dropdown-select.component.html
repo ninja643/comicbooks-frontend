@@ -5,7 +5,7 @@
 	</button>
 
 	<div class="dropdown-menu w-100 overflow-auto" aria-labelledby="dropdownMenuButton">
-		<div *ngIf="searchEnabled" class="input-group mb-3 px-2">
+		<div *ngIf="searchEnabled" class="input-group mb-3 px-4">
 			<input type="text" [ngModel]="filter" (ngModelChange)="filter = $event; filterItems()" class="form-control"
 				[placeholder]="searchPlaceholderText">
 		</div>
