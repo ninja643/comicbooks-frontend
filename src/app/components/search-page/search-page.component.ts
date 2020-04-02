@@ -114,12 +114,14 @@ export class SearchPageComponent {
     }
 
     changePage(page: number): void {
-        this.searchParameters = {
-            ...this.searchParameters,
-            page: page
-        };
-        this.updateQueryParams(false);
-        this.searchParametersChange.emit(this.searchParameters);
+        if (this.searchParameters.page != page) {
+            this.searchParameters = {
+                ...this.searchParameters,
+                page: page
+            };
+            this.updateQueryParams(false);
+            this.searchParametersChange.emit(this.searchParameters);
+        }
     }
 
     columnTrackBy(index: number, column: ColumnDefinition): string {

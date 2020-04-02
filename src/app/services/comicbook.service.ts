@@ -77,18 +77,4 @@ export class ComicbookService {
     })
     return this.httpClient.delete(`${this.url}/${comicbookId}`);
   }
-
-  // private log(message: string): void {
-  //   // this.messageService.add(`PublisherService: ${message}`);
-  // }
-
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error);
-
-  //     this.log(`${operation} failed: ${error.message}`);
-
-  //     return of(result as T);
-  //   };
-  // }
 }

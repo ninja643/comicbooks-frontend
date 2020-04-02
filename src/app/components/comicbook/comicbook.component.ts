@@ -12,7 +12,7 @@ import { HeroService } from 'src/app/services/hero.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { RouterLinks } from 'src/app/common/router-links';
 import { RoutingService } from 'src/app/common/routing.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopupComponent } from '../popups/confirmation/confirmation-popup.component';
 import { PopupResponseEnum } from '../popups/popup-response';
 
@@ -26,7 +26,7 @@ export class ComicbookComponent {
     publishers: Publisher[] = [];
     heroes: Hero[] = [];
     loaderStatus: LoaderStatus = new LoaderStatus();
-    frontPageImage;
+    frontPageImage: string;
 
     private _editMode: boolean;
     get editMode(): boolean {
@@ -95,7 +95,7 @@ export class ComicbookComponent {
     }
 
     delete(): void {
-        const modalRef = this.ngbModal.open(ConfirmationPopupComponent, { centered: true });
+        const modalRef: NgbModalRef = this.ngbModal.open(ConfirmationPopupComponent, { centered: true });
         const popupInstance: ConfirmationPopupComponent = modalRef.componentInstance;
         popupInstance.title = `Delete comicbook \"${this.comicbook.title}\"`;
         popupInstance.content = `Are you sure you want to delete comicbook \"${this.comicbook.title}\"?`;
@@ -109,7 +109,6 @@ export class ComicbookComponent {
                     .subscribe(() => this.routingService.navigateToComicbooks());
             }
         })
-        // TODO add popup confirmation
     }
 
     async save(): Promise<void> {
@@ -172,7 +171,7 @@ export class ComicbookComponent {
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {
-                        this.frontPageImage = reader.result;
+                        this.frontPageImage = <string>reader.result;
                         this.cdRef.markForCheck();
                     };
                 }

@@ -1,11 +1,11 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {AppComponent} from './app.component';
-import {HeaderComponent} from './components/header/header.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ComicbooksHttpClient } from './services/comicbooks-http-client';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -21,10 +21,11 @@ import { ExecutePipe } from './common/execute.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
 import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
-import {NgbPaginationModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { InformationPopupComponent } from './components/popups/information/information-popup.component';
 import { ConfirmationPopupComponent } from './components/popups/confirmation/confirmation-popup.component';
+import { HttpErrorInterceptor } from './services/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,14 @@ import { ConfirmationPopupComponent } from './components/popups/confirmation/con
     InformationPopupComponent,
     ConfirmationPopupComponent
   ],
-  providers: [ComicbooksHttpClient],
+  providers: [
+    ComicbooksHttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

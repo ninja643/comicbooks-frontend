@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLinks } from 'src/app/common/router-links';
+import { appLogo } from 'src/app/common/constants';
 
 @Component({
     selector: 'navbar',
@@ -8,8 +9,6 @@ import { RouterLinks } from 'src/app/common/router-links';
 })
 export class NavbarComponent {
 
-    // TODO da izvucem u konstantu
-    logo: string = 'assets/images/516bea553d41e_thumb900.jpg';
-
+    logo: string = appLogo;
     routerLinksEnum = RouterLinks;
 }

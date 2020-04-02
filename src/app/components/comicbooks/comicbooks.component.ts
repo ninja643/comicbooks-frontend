@@ -50,7 +50,6 @@ export class ComicbooksComponent {
         this.comicbookService.getComicbooks(this.searchParameters)
             .pipe(finalize(() => this.searchPageLoaderStatus.hideLoader()))
             .subscribe({
-                // TODO handle error
                 next: (result: SearchResult<Comicbook>) => {
                     this.searchParameters = {
                         ...this.searchParameters,

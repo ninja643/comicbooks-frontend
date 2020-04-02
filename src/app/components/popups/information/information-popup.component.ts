@@ -10,7 +10,7 @@ export class InformationPopupComponent {
 
     title: string;
     content: string;
-    closeButtonText: string;
+    closeButtonText: string = 'Close';
 
     PopupResponseEnum = PopupResponseEnum;
 
