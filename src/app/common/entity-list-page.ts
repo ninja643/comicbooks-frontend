@@ -19,7 +19,7 @@ export abstract class EntityListPage<Entity extends { id: number }> implements O
 
     constructor(protected routingService: RoutingService,
         protected navigateToNewEntity: () => Promise<any>,
-        protected navigateToEntity: (entity: Entity) => Promise<any>,
+        public navigateToEntity: (entity: Entity) => Promise<any>,
         protected entityName: string) {}
 
     ngOnInit(): void {
