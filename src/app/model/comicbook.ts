@@ -7,7 +7,7 @@ export interface Comicbook {
     number: number;
     title: string;
     frontPageImage: Attachment;
-    publisher: Publisher;
-    heroes: Hero[];
+    publisher?: Publisher;
+    heroes?: Hero[];
   }
   

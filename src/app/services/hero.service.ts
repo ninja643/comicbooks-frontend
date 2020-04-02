@@ -1,61 +1,84 @@
 import { Injectable } from '@angular/core';
-import { Publisher } from '../model/publisher';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { ComicbooksHttpClient } from './comicbooks-http-client';
+import { Observable } from 'rxjs';
+import { SearchParameters } from '../components/search-page/search-page.component';
+import { deleteById, getById, save } from '../mock-data/mock-common';
+import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7, allHeroes } from '../mock-data/mock-heroes';
 import { Hero } from '../model/hero';
-import { getById, save, deleteById } from '../mock-data/mock-common';
-import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from '../mock-data/mock-heroes';
+import { SearchRequest } from '../model/search-request';
+import { SearchResult } from '../model/search-results';
+import { ComicbooksHttpClient } from './comicbooks-http-client';
+import { COMICBOOKS } from '../mock-data/mock-comicbooks';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class HeroService {
 
-    private url = '/hero';
+  private url = '/hero';
 
-    constructor(
-        private httpClient: ComicbooksHttpClient) {
-    }
+  constructor(
+    private httpClient: ComicbooksHttpClient) {
 
-    get temporary_getHeroes(): Hero[] {
-        return [...HEROES1, ...HEROES2, ... HEROES3, ...HEROES4, ...HEROES5, ...HEROES6, ...HEROES7];
-    }
+    // TODO remove
+    allHeroes.forEach(hero => {
+      hero.comicbooks = COMICBOOKS.filter(comicbook => comicbook.heroes.some(x => x.id == hero.id));
+    })
+  }
 
-    getHeroes(): Observable<Hero[]> {
-        return of(this.temporary_getHeroes);
-        return this.httpClient.get<Hero[]>(this.url);
-    }
 
-    getHero(id: number): Observable<Hero> {
-        return of(getById<Hero>(this.temporary_getHeroes, id));
-        const url = `${this.url}/${id}`;
 
-        return this.httpClient.get<Hero>(url);
-    }
+  getHeroes(searchParameters: SearchParameters): Observable<SearchResult<Hero>> {
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        const t = {
+          offset: (searchParameters.page - 1) * searchParameters.pageSize,
+          count: searchParameters.pageSize,
+          totalCount: searchParameters.collectionSize,
+          searchText: searchParameters.searchText,
+          items: allHeroes.slice().filter(x => x.name.toLowerCase().includes(searchParameters.searchText.toLowerCase()))
+        };
+        subscriber.next(t);
+        subscriber.complete();
+      }, 1500);
+    })
+    const requestBody: SearchRequest = {
+      offset: (searchParameters.page - 1) * searchParameters.pageSize,
+      count: searchParameters.pageSize,
+      filterText: searchParameters.searchText
+    };
+    const url: string = `${this.url}/search`;
+    return this.httpClient.post<SearchResult<Hero>>(url, requestBody);
+  }
 
-    saveHero(hero: Hero): Observable<Hero> {
-        return of(save<Hero>(this.temporary_getHeroes, hero));
-        return this.httpClient.post(this.url, hero);
-    }
+  getHero(id: number): Observable<Hero> {
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(getById<Hero>(allHeroes, id));
+        subscriber.complete();
+      }, 1500);
+    })
+    const url = `${this.url}/${id}`;
 
-    deleteHero(heroId: number): Observable<void> {
-        return of(deleteById<Hero>(this.temporary_getHeroes, heroId));
-        return this.httpClient.delete(`${this.url}/${heroId}`);
-    }
+    return this.httpClient.get<Hero>(url);
+  }
 
-    // private log(message: string): void {
-    //   // this.messageService.add(`PublisherService: ${message}`);
-    // }
+  saveHero(hero: Hero): Observable<Hero> {
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(save<Hero>(allHeroes, hero));
+        subscriber.complete();
+      }, 1500);
+    })
+    return this.httpClient.post<Hero>(this.url, hero);
+  }
 
-    // private handleError<T>(operation = 'operation', result?: T) {
-    //   return (error: any): Observable<T> => {
-    //     console.error(error);
-
-    //     this.log(`${operation} failed: ${error.message}`);
-
-    //     return of(result as T);
-    //   };
-    // }
+  deleteHero(heroId: number): Observable<void> {
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(deleteById<Hero>(allHeroes, heroId));
+        subscriber.complete();
+      }, 1500);
+    })
+    return this.httpClient.delete(`${this.url}/${heroId}`);
+  }
 }

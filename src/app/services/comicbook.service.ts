@@ -1,16 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Publisher} from '../model/publisher';
-import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import { ComicbooksHttpClient } from './comicbooks-http-client';
-import { Hero } from '../model/hero';
-import { Comicbook } from '../model/comicbook';
-import { COMICBOOKS } from '../mock-data/mock-comicbooks';
-import { getById, save, deleteById } from '../mock-data/mock-common';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SearchParameters } from '../components/search-page/search-page.component';
-import { SearchResult } from '../model/search-results';
+import { COMICBOOKS } from '../mock-data/mock-comicbooks';
+import { deleteById, getById, save } from '../mock-data/mock-common';
+import { Comicbook } from '../model/comicbook';
 import { SearchRequest } from '../model/search-request';
+import { SearchResult } from '../model/search-results';
+import { ComicbooksHttpClient } from './comicbooks-http-client';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +61,7 @@ export class ComicbookService {
         subscriber.complete();
       }, 1500);
     })
-    return this.httpClient.post(this.url, comicbook);
+    return this.httpClient.post<Comicbook>(this.url, comicbook);
   }
 
   deleteComicbook(comicbookId: number): Observable<void> {

@@ -1,4 +1,4 @@
-<search-page [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
+<search-page [staticMode]="staticMode" [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
     [columns]="tableColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
     [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
     <ng-template content-template="title" let-comicbook>

@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { ComicbookService } from 'src/app/services/comicbook.service';
-import { Comicbook } from 'src/app/model/comicbook';
-import { LoaderStatus } from 'src/app/common/loader-status';
-import { ButtonInfo } from 'src/app/common/button-info';
+import { Input, OnInit } from "@angular/core";
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { ButtonInfo } from 'src/app/common/button-info';
+import { LoaderStatus } from 'src/app/common/loader-status';
 import { RoutingService } from 'src/app/common/routing.service';
 import { SearchResult } from 'src/app/model/search-results';
 import { ColumnDefinition, SearchParameters } from '../components/search-page/search-page.component';
-import { Observable } from 'rxjs';
 
-export abstract class EntityListPage<Entity extends { id: number }> implements OnInit{
+export abstract class EntityListPage<Entity extends { id: number }> implements OnInit {
 
-    entities: Entity[] = [];
+    // If true, doesn't send search request, but expect that entities are passed through the input
+    @Input() staticMode: boolean;
+    @Input() entities: Entity[] = [];
     tableColumns: ColumnDefinition[];
     searchPageLoaderStatus: LoaderStatus = new LoaderStatus();
     addNewEntityButtonInfo: ButtonInfo
@@ -20,14 +20,17 @@ export abstract class EntityListPage<Entity extends { id: number }> implements O
     constructor(protected routingService: RoutingService,
         protected navigateToNewEntity: () => Promise<any>,
         public navigateToEntity: (entity: Entity) => Promise<any>,
-        protected entityName: string) {}
+        protected entityName: string) { }
 
     ngOnInit(): void {
         this.addNewEntityButtonInfo = {
             text: `Add new ${this.entityName}`,
             execute: this.navigateToNewEntity
         };
-        this.patchEntities();
+
+        if (!this.staticMode) {
+            this.patchEntities();
+        }
 
         this.generateTableColumns();
 
@@ -41,8 +44,10 @@ export abstract class EntityListPage<Entity extends { id: number }> implements O
     }
 
     searchEntities(searchParameters: SearchParameters): void {
-        this.searchParameters = searchParameters;
-        this.patchEntities();
+        if (!this.staticMode) {
+            this.searchParameters = searchParameters;
+            this.patchEntities();
+        }
     }
 
     private patchEntities(): void {

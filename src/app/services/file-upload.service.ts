@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
 import { Attachment } from '../model/attachment';
-import { frontPageImage } from '../mock-data/mock-comicbooks';
+import { frontPageImage } from '../mock-data/attachment';
 
 @Injectable({
     providedIn: 'root'

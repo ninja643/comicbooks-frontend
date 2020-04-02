@@ -1,0 +1,39 @@
+<loader [status]="loaderStatus">
+    <div class="d-flex justify-content-center mb-4">
+        <h2 *ngIf="entity?.name">Hero: {{entity.name}}</h2>
+    </div>
+
+    <form [formGroup]="form" class="d-flex flex-wrap">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-5 offset-lg-0 mb-5">
+            <div class="front-page-image mb-2" [background-image]="shownPicture"></div>
+            <file-input [class.invisible]="form.controls.picture.disabled"
+                formControlName="picture" buttonText="Choose image" acceptTypes="image/*"></file-input>
+        </div>
+
+        <div class="col-12 col-md-10 offset-md-1 col-lg-7 offset-lg-0 mb-5">
+            <div class="form-group">
+                <label for="titleInput">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name">
+            </div>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-center">
+        <ng-container *ngIf="!editMode; else editModeButtons">
+            <button (click)="edit()" class="btn btn-primary text-nowrap mr-4">Edit</button>
+            <button (click)="delete()" class="btn btn-danger text-nowrap">Delete</button>
+        </ng-container>
+        <ng-template #editModeButtons>
+            <button (click)="save()" [disabled]="saveClicked && form.invalid"
+                class="btn btn-primary text-nowrap mr-4">Save</button>
+            <button (click)="cancel()" class="btn btn-secondary text-nowrap">Cancel</button>
+        </ng-template>
+    </div>
+
+    <div class="mt-5">
+        <div class="d-flex justify-content-center mb-4">
+            <h3 *ngIf="entity?.name">Comicbooks</h3>
+        </div>
+        <comicbooks [staticMode]="true" [entities]="entity?.comicbooks"></comicbooks>
+    </div>
+</loader>

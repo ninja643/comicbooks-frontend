@@ -13,6 +13,8 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { HeroService } from 'src/app/services/hero.service';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { Attachment } from 'src/app/model/attachment';
+import { SearchParameters } from '../search-page/search-page.component';
+import { SearchResult } from 'src/app/model/search-results';
 
 @Component({
     templateUrl: 'comicbook.component.html',
@@ -108,19 +110,20 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
     // Override
     protected initialize(): void {
         super.initialize();
+        const getAllItemsSearchParameters: SearchParameters = new SearchParameters(1, 999999, 999999);
 
         this.loaderStatus.showLoader();
-        this.publisherService.getPublishers()
+        this.publisherService.getPublishers(getAllItemsSearchParameters)
             .pipe(finalize(() => this.loaderStatus.hideLoader()))
             .subscribe({
-                next: (publishers: Publisher[]) => this.publishers = publishers
+                next: (publishersSearchResult: SearchResult<Publisher>) => this.publishers = publishersSearchResult.items
             });
 
         this.loaderStatus.showLoader();
-        this.heroService.getHeroes()
+        this.heroService.getHeroes(getAllItemsSearchParameters)
             .pipe(finalize(() => this.loaderStatus.hideLoader()))
             .subscribe({
-                next: (heroes: Hero[]) => this.heroes = heroes
+                next: (heroesSearchResult: SearchResult<Hero>) => this.heroes = heroesSearchResult.items
             });
     }
 

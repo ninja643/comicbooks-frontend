@@ -123,12 +123,10 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
             else {
                 selectedItems = this.selectedValue ? [this.selectedValue] : [];
             }
-            selectedItems.forEach(selectedItem => {
-                const selectorItem: SelectorItem = this.allItems.find(item => this.trackBy(0, item.value) == this.trackBy(0, selectedItem));
-                if (selectorItem) {
-                    selectorItem.selected = true;
-                }
-            });
+            const trackBySet: Set<any> = new Set(
+                selectedItems.map(item => this.trackBy(0, item))
+            );
+            this.allItems.forEach(item => item.selected = trackBySet.has(this.trackBy(0, item.value)));
         }
     }
 

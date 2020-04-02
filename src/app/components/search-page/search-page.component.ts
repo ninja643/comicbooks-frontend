@@ -42,6 +42,8 @@ export class SearchParameters {
 })
 export class SearchPageComponent {
 
+    // If true, doesn't send search request, but expect that entities are passed through the input
+    @Input() staticMode: boolean;
     @Input() searchEnabled: boolean;
     @Input() searchPlaceholderText: string = "Search";
     @Input() addNewItemButtonInfo: ButtonInfo;
@@ -90,7 +92,7 @@ export class SearchPageComponent {
         }
 
         const searchParametersChange: SimpleChange = changes['searchParameters'];
-        if (searchParametersChange) {
+        if (!this.staticMode && searchParametersChange) {
             this.searchText = this.searchParameters.searchText;
             if (searchParametersChange.firstChange) {
                 this.updateSearchParametersBasedOnQueryParams(this.activatedRoute.snapshot.queryParams);
@@ -102,6 +104,8 @@ export class SearchPageComponent {
     }
 
     searchByText(): void {
+        if (this.staticMode)
+            return;
         if (this.searchText != this.searchParameters.searchText) {
             this.searchParameters = {
                 ...this.searchParameters,
@@ -114,6 +118,8 @@ export class SearchPageComponent {
     }
 
     changePage(page: number): void {
+        if (this.staticMode)
+            return;
         if (this.searchParameters.page != page) {
             this.searchParameters = {
                 ...this.searchParameters,
@@ -160,6 +166,8 @@ export class SearchPageComponent {
     }
 
     protected updateSearchParametersBasedOnQueryParams(queryParams: Params): void {
+        if (this.staticMode)
+            return;
         let areSearchParametersChanged: boolean;
         const searchTextQueryParam: string = queryParams[this.searchParameters.searchTextQueryParamKey];
         if (!isNullOrUndefined(searchTextQueryParam) && searchTextQueryParam != this.searchParameters.searchText) {
@@ -179,6 +187,8 @@ export class SearchPageComponent {
     }
 
     private updateQueryParams(replaceUrl: boolean): void {
+        if (this.staticMode)
+            return;
         const queryParams: Params = {};
         if (this.searchParameters.searchTextQueryParamKey) {
             queryParams[this.searchParameters.searchTextQueryParamKey] = this.searchParameters.searchText || null;

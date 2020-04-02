@@ -1,10 +1,11 @@
+import { Location } from '@angular/common';
 import { Injector, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoaderStatus } from 'src/app/common/loader-status';
-import { finalize } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoaderStatus } from 'src/app/common/loader-status';
 import { ConfirmationPopupComponent } from '../components/popups/confirmation/confirmation-popup.component';
 import { PopupResponseEnum } from '../components/popups/popup-response';
 
@@ -34,6 +35,7 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
     protected activatedRoute: ActivatedRoute;
     protected router: Router;
     protected ngbModal: NgbModal;
+    protected location: Location;
 
     constructor(injector: Injector,
         protected newEntityRoute: string,
@@ -43,6 +45,7 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
         this.activatedRoute = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
         this.ngbModal = injector.get(NgbModal);
+        this.location = injector.get(Location);
     }
 
     ngOnInit(): void {
@@ -108,7 +111,12 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
     }
 
     cancel(): void {
-        this.entity = this.entity;
+        if (this.entity.id) {
+            this.setEntity(this.entity);
+        }
+        else {
+            this.location.back();
+        }
     }
 
     defaultTrackBy(index: number, item: any): number {
