@@ -1,12 +1,12 @@
 <loader [status]="loaderStatus">
     <div class="d-flex justify-content-center mb-4">
-        <h2 *ngIf="comicbook?.title">Comicbook: {{comicbook.title}}</h2>
+        <h2 *ngIf="entity?.title">Comicbook: {{entity.title}}</h2>
     </div>
 
-    <form [formGroup]="comicbookForm" class="d-flex flex-wrap">
+    <form [formGroup]="form" class="d-flex flex-wrap">
         <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-5 offset-lg-0 mb-5">
             <div class="front-page-image mb-2" [background-image]="frontPageImage"></div>
-            <file-input [class.invisible]="comicbookForm.controls.frontPageImage.disabled"
+            <file-input [class.invisible]="form.controls.frontPageImage.disabled"
                 formControlName="frontPageImage" buttonText="Choose image" acceptTypes="image/*"></file-input>
         </div>
 
@@ -43,7 +43,7 @@
             <button (click)="delete()" class="btn btn-danger text-nowrap">Delete</button>
         </ng-container>
         <ng-template #editModeButtons>
-            <button (click)="save()" [disabled]="comicbookForm.touched && comicbookForm.invalid"
+            <button (click)="save()" [disabled]="saveClicked && form.invalid"
                 class="btn btn-primary text-nowrap mr-4">Save</button>
             <button (click)="cancel()" class="btn btn-secondary text-nowrap">Cancel</button>
         </ng-template>
