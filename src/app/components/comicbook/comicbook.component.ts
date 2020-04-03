@@ -136,10 +136,9 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
     private getComicbookFromForm(): Comicbook {
         const formValue = this.form.getRawValue();
         return {
-            id: this.entity ? this.entity.id : null,
+            ...this.entity,
             number: formValue.number,
             title: formValue.title,
-            frontPageImage: this.entity.frontPageImage,
             publisher: formValue.publisher,
             heroes: formValue.heroes
         }

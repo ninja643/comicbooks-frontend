@@ -99,7 +99,7 @@ export class HeroComponent extends EntityPage<Hero> {
     private getHeroFromForm(): Hero {
         const formValue = this.form.getRawValue();
         return {
-            id: this.entity ? this.entity.id : null,
+            ...this.entity,
             name: formValue.name,
             picture: this.entity.picture
         }
