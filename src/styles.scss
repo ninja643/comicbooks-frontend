@@ -58,3 +58,20 @@ body, input[type="text"], button {
 input.ng-invalid.ng-touched {
   border-color: $invalid-control-border-color;
 }
+
+.search-list-image {
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.entity-page-image {
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid $comicbook-image-border-color;
+  border-radius: 5px;
+}

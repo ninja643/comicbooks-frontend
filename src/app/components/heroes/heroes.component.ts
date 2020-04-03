@@ -7,8 +7,7 @@ import { SearchResult } from 'src/app/model/search-results';
 import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
-    templateUrl: 'heroes.component.html',
-    styleUrls: ['heroes.component.scss']
+    templateUrl: 'heroes.component.html'
 })
 export class HeroesComponent extends EntityListPage<Hero> {
 

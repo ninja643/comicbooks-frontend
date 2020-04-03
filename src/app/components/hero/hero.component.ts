@@ -11,8 +11,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
-    templateUrl: 'hero.component.html',
-    styleUrls: ['hero.component.scss']
+    templateUrl: 'hero.component.html'
 })
 export class HeroComponent extends EntityPage<Hero> {
 

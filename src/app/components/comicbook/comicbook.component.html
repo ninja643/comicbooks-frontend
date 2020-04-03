@@ -5,9 +5,9 @@
 
     <form [formGroup]="form" class="d-flex flex-wrap">
         <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-5 offset-lg-0 mb-5">
-            <div class="front-page-image mb-2" [background-image]="frontPageImage"></div>
-            <file-input [class.invisible]="form.controls.frontPageImage.disabled"
-                formControlName="frontPageImage" buttonText="Choose image" acceptTypes="image/*"></file-input>
+            <div class="entity-page-image mb-2" [background-image]="frontPageImage"></div>
+            <file-input [class.invisible]="form.controls.frontPageImage.disabled" formControlName="frontPageImage"
+                buttonText="Choose image" acceptTypes="image/*"></file-input>
         </div>
 
         <div class="col-12 col-md-10 offset-md-1 col-lg-7 offset-lg-0 mb-5">

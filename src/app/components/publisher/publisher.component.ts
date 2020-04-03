@@ -11,8 +11,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { PublisherService } from 'src/app/services/publisher.service';
 
 @Component({
-    templateUrl: 'publisher.component.html',
-    styleUrls: ['publisher.component.scss']
+    templateUrl: 'publisher.component.html'
 })
 export class PublisherComponent extends EntityPage<Publisher> {
 

@@ -5,7 +5,7 @@
 
     <form [formGroup]="form" class="d-flex flex-wrap">
         <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-5 offset-lg-0 mb-5">
-            <div class="front-page-image mb-2" [background-image]="shownPicture"></div>
+            <div class="entity-page-image mb-2" [background-image]="shownPicture"></div>
             <file-input [class.invisible]="form.controls.picture.disabled"
                 formControlName="picture" buttonText="Choose image" acceptTypes="image/*"></file-input>
         </div>

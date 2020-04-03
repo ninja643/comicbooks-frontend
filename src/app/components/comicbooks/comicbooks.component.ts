@@ -8,8 +8,7 @@ import { ComicbookService } from 'src/app/services/comicbook.service';
 
 @Component({
     selector: 'comicbooks',
-    templateUrl: 'comicbooks.component.html',
-    styleUrls: ['comicbooks.component.scss']
+    templateUrl: 'comicbooks.component.html'
 })
 export class ComicbooksComponent extends EntityListPage<Comicbook> {
 

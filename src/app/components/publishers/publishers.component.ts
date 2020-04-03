@@ -7,8 +7,7 @@ import { SearchResult } from 'src/app/model/search-results';
 import { PublisherService } from 'src/app/services/publisher.service';
 
 @Component({
-    templateUrl: 'publishers.component.html',
-    styleUrls: ['publishers.component.scss']
+    templateUrl: 'publishers.component.html'
 })
 export class PublishersComponent extends EntityListPage<Publisher> {
 

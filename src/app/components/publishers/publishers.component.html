@@ -3,7 +3,7 @@
     [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
     <ng-template content-template="name" let-publisher>
         <div class="d-flex align-items-center">
-            <div class="front-page-image mr-2" [background-image]="publisher.picture?.url"></div>
+            <div class="search-list-image mr-2" [background-image]="publisher.picture?.url"></div>
             {{publisher.name}}
         </div>
     </ng-template>
