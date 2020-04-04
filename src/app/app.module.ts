@@ -21,7 +21,7 @@ import { ExecutePipe } from './common/execute.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
 import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
-import { NgbPaginationModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbModalModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { InformationPopupComponent } from './components/popups/information/information-popup.component';
 import { ConfirmationPopupComponent } from './components/popups/confirmation/confirmation-popup.component';
@@ -56,7 +56,8 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
     AppRoutingModule,
     HttpClientModule,
     NgbPaginationModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbPopoverModule
   ],
   entryComponents: [
     InformationPopupComponent,

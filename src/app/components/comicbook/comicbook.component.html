@@ -23,16 +23,29 @@
 
             <div class="form-group">
                 <label>Publisher</label>
-                <dropdown-select formControlName="publisher" [items]="publishers" displayPath="name" searchEnabled=true
-                    [trackBy]="defaultTrackBy">
-                </dropdown-select>
+
+                <ng-template #publisherDropdownTemplate>
+                    <dropdown-select formControlName="publisher"
+                        [items]="publishers" displayPath="name" searchEnabled=true [trackBy]="defaultTrackBy">
+                    </dropdown-select>
+                </ng-template>
+                <ng-container [ngTemplateOutlet]="enrichTemplateWithPopoverTemplate"
+                    [ngTemplateOutletContext]="{template: publisherDropdownTemplate, items: [entity?.publisher], routerLinkGeneratorFn: generatePublisherRouterLink}">
+                </ng-container>
             </div>
 
             <div class="form-group">
                 <label>Heroes</label>
-                <dropdown-select formControlName="heroes" [items]="heroes" displayPath="name" searchEnabled=true
-                    multiselection=true [trackBy]="defaultTrackBy">
-                </dropdown-select>
+
+                <ng-template #heroesDropdownTemplate>
+                    <dropdown-select formControlName="heroes"
+                        [items]="heroes" displayPath="name" searchEnabled=true multiselection=true
+                        [trackBy]="defaultTrackBy">
+                    </dropdown-select>
+                </ng-template>
+                <ng-container [ngTemplateOutlet]="enrichTemplateWithPopoverTemplate"
+                    [ngTemplateOutletContext]="{template: heroesDropdownTemplate, items: entity?.heroes, routerLinkGeneratorFn: generateHeroRouterLink}">
+                </ng-container>
             </div>
         </div>
     </form>
@@ -49,3 +62,18 @@
         </ng-template>
     </div>
 </loader>
+
+<ng-template #enrichTemplateWithPopoverTemplate let-template="template" let-items="items" let-routerLinkGeneratorFn="routerLinkGeneratorFn">
+    <div class="position-relative" [class.increase-dropdown-select-border-on-hover]="!editMode">
+        <ng-container *ngTemplateOutlet="template"></ng-container>
+        <button *ngIf="!editMode" [ngbPopover]="popoverTemplate" class="button-dropdown-overlay position-absolute w-100 h-100 bg-transparent border-0"></button>
+    </div>
+
+    <ng-template #popoverTemplate>
+        <div class="d-flex flex-wrap justify-content-center">
+            <a *ngFor="let item of items" [routerLink]="routerLinkGeneratorFn | execute : item" class="link-item p-1">
+                {{item.name}}
+            </a>
+        </div>
+    </ng-template>
+</ng-template>

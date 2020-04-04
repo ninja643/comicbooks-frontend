@@ -41,6 +41,14 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
             super(injector, RouterLinks.NewComicbook, 'comicbookId', 'comicbook', 'comicbook');
     }
 
+    generatePublisherRouterLink = (publisher: Publisher): string[] =>{
+        return ['/', RouterLinks.Publisher, '' + publisher.id];
+    }
+
+    generateHeroRouterLink = (hero: Hero): string[] =>{
+        return ['/', RouterLinks.Hero, '' + hero.id];
+    }
+
     protected getEntity(): Observable<Comicbook> {
         return this.comicbookService.getComicbook(this.entityId)
     }
