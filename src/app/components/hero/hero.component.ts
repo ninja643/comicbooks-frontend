@@ -90,6 +90,10 @@ export class HeroComponent extends EntityPage<Hero> {
         };
     }
 
+    protected navigateToEntityListPage(): Promise<any> {
+        return this.routingService.navigateToHeroes();
+    }
+
     // Override
     protected setEntity(hero: Hero): void {
         super.setEntity(hero);

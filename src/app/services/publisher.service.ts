@@ -51,7 +51,11 @@ export class PublisherService {
 	getPublisher(id: number): Observable<Publisher> {
 		return new Observable(subscriber => {
 			setTimeout(() => {
-				subscriber.next(getById<Publisher>(allPublishers, id));
+				const toReturn = getById<Publisher>(allPublishers, id);
+				if (toReturn)
+					subscriber.next(toReturn);
+				else
+					subscriber.error('gfgf');
 				subscriber.complete();
 			}, 1500);
 		})

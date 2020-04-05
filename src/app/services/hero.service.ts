@@ -25,8 +25,6 @@ export class HeroService {
     })
   }
 
-
-
   getHeroes(searchParameters: SearchParameters): Observable<SearchResult<Hero>> {
     return new Observable(subscriber => {
       setTimeout(() => {
@@ -53,7 +51,11 @@ export class HeroService {
   getHero(id: number): Observable<Hero> {
     return new Observable(subscriber => {
       setTimeout(() => {
-        subscriber.next(getById<Hero>(allHeroes, id));
+        const toReturn = getById<Hero>(allHeroes, id);
+        if (toReturn)
+          subscriber.next(toReturn);
+        else
+          subscriber.error('gfgf');
         subscriber.complete();
       }, 1500);
     })

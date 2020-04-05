@@ -9,7 +9,7 @@ import { LoaderStatus } from 'src/app/common/loader-status';
 import { ConfirmationPopupComponent } from '../components/popups/confirmation/confirmation-popup.component';
 import { PopupResponseEnum } from '../components/popups/popup-response';
 
-export abstract class EntityPage<Entity extends { id: number }> implements OnInit{
+export abstract class EntityPage<Entity extends { id: number }> implements OnInit {
 
     form: FormGroup;
     loaderStatus: LoaderStatus = new LoaderStatus();
@@ -58,12 +58,17 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
                 const entityId: number = params[this.entityIdQueryParam];
                 if (entityId) {
                     this.entityId = +entityId;
-                    const entity: Entity = window.history.state ? window.history.state[this.routeStateEntityKey] : null;
-                    if (entity) {
-                        this.setEntity(entity);
+                    if (isNaN(entityId)) {
+                        this.navigateToEntityListPage();
                     }
                     else {
-                        this.patchEntity();
+                        const entity: Entity = window.history.state ? window.history.state[this.routeStateEntityKey] : null;
+                        if (entity) {
+                            this.setEntity(entity);
+                        }
+                        else {
+                            this.patchEntity();
+                        }
                     }
                 }
             });
@@ -76,6 +81,7 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
     protected abstract getEntityName(): string;
     protected abstract buildForm(): void;
     protected abstract makeFormValue(entity: Entity): any;
+    protected abstract navigateToEntityListPage(): Promise<any>;
 
     edit(): void {
         this.editMode = true;
@@ -138,7 +144,8 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
         this.getEntity()
             .pipe(finalize(() => this.loaderStatus.hideLoader()))
             .subscribe({
-                next: (entity: Entity) => this.setEntity(entity)
+                next: (entity: Entity) => this.setEntity(entity),
+                error: () => this.navigateToEntityListPage()
             });
     }
 }

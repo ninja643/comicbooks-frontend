@@ -90,6 +90,10 @@ export class PublisherComponent extends EntityPage<Publisher> {
         };
     }
 
+    protected navigateToEntityListPage(): Promise<any> {
+        return this.routingService.navigateToPublishers();
+    }
+
     // Override
     protected setEntity(publisher: Publisher): void {
         super.setEntity(publisher);

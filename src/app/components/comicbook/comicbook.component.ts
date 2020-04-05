@@ -115,6 +115,10 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
         };
     }
 
+    protected navigateToEntityListPage(): Promise<any> {
+        return this.routingService.navigateToComicbooks();
+    }
+
     // Override
     protected initialize(): void {
         super.initialize();

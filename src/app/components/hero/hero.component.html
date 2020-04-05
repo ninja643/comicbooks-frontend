@@ -30,9 +30,9 @@
         </ng-template>
     </div>
 
-    <div class="mt-5">
+    <div class="mt-5" *ngIf="entity?.comicbooks">
         <div class="d-flex justify-content-center mb-4">
-            <h3 *ngIf="entity?.name">Comicbooks</h3>
+            <h3>Comicbooks</h3>
         </div>
         <comicbooks [staticMode]="true" [entities]="entity?.comicbooks"></comicbooks>
     </div>

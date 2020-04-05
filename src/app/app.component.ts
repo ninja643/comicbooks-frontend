@@ -13,5 +13,3 @@ export class AppComponent {
 // TODO
 
 // 4. Da li treba neka validacija prilikom dodavanja novih stvari (da ne dozvolim dodavanje ako vec postoji)
-// 5. Da obradim ako id u url-u nije dobar
-// Elipsis da dodam kod dropdown komponente 

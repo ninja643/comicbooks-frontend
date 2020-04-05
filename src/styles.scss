@@ -75,3 +75,9 @@ input.ng-invalid.ng-touched {
   border: 1px solid $comicbook-image-border-color;
   border-radius: 5px;
 }
+
+.add-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 

@@ -45,7 +45,11 @@ export class ComicbookService {
   getComicbook(id: number): Observable<Comicbook> {
     return new Observable(subscriber => {
       setTimeout(() => {
-        subscriber.next(getById<Comicbook>(COMICBOOKS, id));
+        const toReturn = getById<Comicbook>(COMICBOOKS, id);
+        if (toReturn)
+          subscriber.next(toReturn);
+        else
+          subscriber.error('gfgf');
         subscriber.complete();
       }, 1500);
     })

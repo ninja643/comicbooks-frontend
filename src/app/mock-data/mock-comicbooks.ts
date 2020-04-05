@@ -1,6 +1,6 @@
 import { Comicbook } from '../model/comicbook';
 import { frontPageImage } from './attachment';
-import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from './mock-heroes';
+import { HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7, allHeroes } from './mock-heroes';
 import { PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4 } from './mock-publishers';
 
 export const COMICBOOKS: Comicbook[] = [
@@ -10,7 +10,7 @@ export const COMICBOOKS: Comicbook[] = [
     title: 'Comicbook 1',
     frontPageImage: frontPageImage,
     publisher: PUBLISHER1,
-    heroes: HEROES1
+    heroes: allHeroes
   },
   {
     id: 2,
