@@ -6,4 +6,4 @@ export interface Hero {
     name: string;
     picture: Attachment;
     comicbooks?: Comicbook[];
-} 
+}

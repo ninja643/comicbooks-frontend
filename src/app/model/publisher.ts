@@ -1,5 +1,5 @@
-import { Attachment } from './attachment';
-import { Comicbook } from './comicbook';
+import {Attachment} from './attachment';
+import {Comicbook} from './comicbook';
 
 export interface Publisher {
   id: number;

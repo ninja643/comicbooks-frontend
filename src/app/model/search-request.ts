@@ -1,5 +1,5 @@
 export interface SearchRequest {
-    offset?: number;
-    count: number;
-    filterText?: string;
+  offset?: number;
+  count: number;
+  filterText?: string;
 }

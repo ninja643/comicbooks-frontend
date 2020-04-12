@@ -6,5 +6,5 @@ export interface Attachment {
 }
 
 export enum AttachmentType {
-    Image = "Image"
+    Image = 'Image'
 }

@@ -14,15 +14,15 @@ import { ComicbooksHttpClient } from './comicbooks-http-client';
 })
 export class HeroService {
 
-  private url = '/hero';
+  private url = '/heroes';
 
   constructor(
     private httpClient: ComicbooksHttpClient) {
 
     // TODO remove
     allHeroes.forEach(hero => {
-      hero.comicbooks = COMICBOOKS.filter(comicbook => comicbook.heroes.some(x => x.id == hero.id));
-    })
+      hero.comicbooks = COMICBOOKS.filter(comicbook => comicbook.heroes.some(x => x.id === hero.id));
+    });
   }
 
   getHeroes(searchParameters: SearchParameters): Observable<SearchResult<Hero>> {

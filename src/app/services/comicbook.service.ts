@@ -13,7 +13,7 @@ import { ComicbooksHttpClient } from './comicbooks-http-client';
 })
 export class ComicbookService {
 
-  private url = '/comicbook';
+  private url = '/comicbooks';
 
   constructor(
     private httpClient: ComicbooksHttpClient) {
