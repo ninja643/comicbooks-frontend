@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serviceUrl: '...',
+  serviceUrl: 'http://localhost:8080/comicbooks/services/rest/v1/',
 };
 
 /*
