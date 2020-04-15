@@ -43,11 +43,11 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
 
 	generatePublisherRouterLink = (publisher: Publisher): string[] => {
 		return ['/', RouterLinks.Publisher, '' + publisher.id];
-	};
+	}
 
 	generateHeroRouterLink = (hero: Hero): string[] => {
 		return ['/', RouterLinks.Hero, '' + hero.id];
-	};
+	}
 
 	protected getEntity(): Observable<Comicbook> {
 		return this.comicbookService.getComicbook(this.entityId);
