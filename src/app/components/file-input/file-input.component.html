@@ -1,0 +1,5 @@
+<div class="custom-file" (click)="markAsTouched()">
+    <input type="file" (change)="fileChanged($event)" [disabled]="disabled" [accept]="acceptTypes"
+        class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">{{buttonText}}</label>
+</div>

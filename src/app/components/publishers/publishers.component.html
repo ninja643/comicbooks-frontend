@@ -1,6 +1,10 @@
-<h2>Available publishers</h2>
-<ul class="publishers">
-  <li *ngFor="let publisher of publishers">
-    <a routerLink="/publisher-details/{{publisher.id}}"><span class="badge">{{publisher.name}}</span></a>
-  </li>
-</ul>
+<search-page [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
+    [columns]="tableColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
+    [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
+    <ng-template content-template="name" let-publisher>
+        <div class="d-flex align-items-center">
+            <div class="search-list-image mr-2" [background-image]="publisher.picture?.url"></div>
+            {{publisher.name}}
+        </div>
+    </ng-template>
+</search-page>

@@ -1,0 +1,13 @@
+@import "variables";
+
+:host {
+    &.ng-invalid.ng-touched {
+        button.form-control {
+            border-color: $invalid-control-border-color;
+        }
+    }
+
+    .dropdown-menu {
+        max-height: 40vh;
+    }
+}

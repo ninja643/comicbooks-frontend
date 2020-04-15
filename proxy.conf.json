@@ -1,10 +1,10 @@
 {
-  "/publisher/*": {
-    "target": "http://localhost:8080/comicbookserver_war_exploded/services/rest/publisher",
+  "/publishers/*": {
+    "target": "http://localhost:8080/comicbooks/services/rest/v1/publishers",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/publisher" : ""
+      "^/publishers" : ""
     },
     "logLevel": "debug"
   }

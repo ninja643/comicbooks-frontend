@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/_functions.scss";
+@import '~bootstrap/scss/_variables.scss';
+@import 'variables';
+
+:host {    
+    .increase-dropdown-select-border-on-hover:hover {
+        dropdown-select::ng-deep button.dropdown-toggle {
+            border-width: 2px;
+            cursor: pointer;
+        }
+    }
+
+    .button-dropdown-overlay {
+        top: 0;
+        outline: 0;
+    }
+
+    .link-item {
+        color: $input-color;
+    }
+}

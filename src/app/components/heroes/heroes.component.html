@@ -1,0 +1,10 @@
+<search-page [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
+    [columns]="tableColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
+    [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
+    <ng-template content-template="name" let-hero>
+        <div class="d-flex align-items-center">
+            <div class="search-list-image mr-2" [background-image]="hero.picture?.url"></div>
+            {{hero.name}}
+        </div>
+    </ng-template>
+</search-page>

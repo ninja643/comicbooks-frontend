@@ -8,3 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'comicbooks-frontend';
 }
+
+
+// TODO
+
+// 4. Da li treba neka validacija prilikom dodavanja novih stvari (da ne dozvolim dodavanje ako vec postoji)
