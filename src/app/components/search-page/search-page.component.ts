@@ -1,24 +1,21 @@
 import {
 	Component,
-	Input,
-	TemplateRef,
-	EventEmitter,
-	Output,
-	ContentChild,
-	QueryList,
 	ContentChildren,
+	EventEmitter,
+	Input,
+	Output,
+	QueryList,
+	SimpleChange,
 	SimpleChanges,
-	SimpleChange
+	TemplateRef
 } from '@angular/core';
-import {ComicbookService} from 'src/app/services/comicbook.service';
-import {Comicbook} from 'src/app/model/comicbook';
-import {HeaderTemplateDirective} from './header-template.directive';
-import {ContentTemplateDirective} from './content-template.directive';
-import {isNullOrUndefined} from 'util';
-import {LoaderStatus} from 'src/app/common/loader-status';
-import {ButtonInfo} from 'src/app/common/button-info';
-import {ActivatedRoute, Params} from '@angular/router';
-import {RoutingService} from 'src/app/common/routing.service';
+import { HeaderTemplateDirective } from './header-template.directive';
+import { ContentTemplateDirective } from './content-template.directive';
+import { isNullOrUndefined } from 'util';
+import { LoaderStatus } from 'src/app/common/loader-status';
+import { ButtonInfo } from 'src/app/common/button-info';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RoutingService } from 'src/app/common/routing.service';
 
 export interface ColumnDefinition {
 	id: string;

@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {RouterLinks} from 'src/app/common/router-links';
-import {appLogo} from 'src/app/common/constants';
+import { Component } from '@angular/core';
+import { RouterLinks } from 'src/app/common/router-links';
+import { appLogo } from 'src/app/common/constants';
 
 @Component({
 	selector: 'navbar',

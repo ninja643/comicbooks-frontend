@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {SearchParameters} from '../components/search-page/search-page.component';
-import {COMICBOOKS} from '../mock-data/mock-comicbooks';
-import {deleteById, getById, save} from '../mock-data/mock-common';
-import {Comicbook} from '../model/comicbook';
-import {SearchRequest} from '../model/search-request';
-import {SearchResult} from '../model/search-results';
-import {ComicbooksHttpClient} from './comicbooks-http-client';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SearchParameters } from '../components/search-page/search-page.component';
+import { COMICBOOKS } from '../mock-data/mock-comicbooks';
+import { deleteById, getById, save } from '../mock-data/mock-common';
+import { Comicbook } from '../model/comicbook';
+import { SearchRequest } from '../model/search-request';
+import { SearchResult } from '../model/search-results';
+import { ComicbooksHttpClient } from './comicbooks-http-client';
 
 @Injectable({
 	providedIn: 'root'

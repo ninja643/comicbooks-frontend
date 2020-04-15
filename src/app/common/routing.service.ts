@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Comicbook} from '../model/comicbook';
-import {Hero} from '../model/hero';
-import {Publisher} from '../model/publisher';
-import {RouterLinks} from './router-links';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Comicbook } from '../model/comicbook';
+import { Hero } from '../model/hero';
+import { Publisher } from '../model/publisher';
+import { RouterLinks } from './router-links';
 
 @Injectable({
 	providedIn: 'root'

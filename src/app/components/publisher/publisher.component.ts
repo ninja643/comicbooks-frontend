@@ -1,14 +1,14 @@
-import {ChangeDetectorRef, Component, Injector} from '@angular/core';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {Observable, of} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {EntityPage} from 'src/app/common/entity-page';
-import {RouterLinks} from 'src/app/common/router-links';
-import {RoutingService} from 'src/app/common/routing.service';
-import {Attachment} from 'src/app/model/attachment';
-import {Publisher} from 'src/app/model/publisher';
-import {FileUploadService} from 'src/app/services/file-upload.service';
-import {PublisherService} from 'src/app/services/publisher.service';
+import { ChangeDetectorRef, Component, Injector } from '@angular/core';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { EntityPage } from 'src/app/common/entity-page';
+import { RouterLinks } from 'src/app/common/router-links';
+import { RoutingService } from 'src/app/common/routing.service';
+import { Attachment } from 'src/app/model/attachment';
+import { Publisher } from 'src/app/model/publisher';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { PublisherService } from 'src/app/services/publisher.service';
 
 @Component({
 	templateUrl: 'publisher.component.html'

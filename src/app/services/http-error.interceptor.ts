@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {InformationPopupComponent} from '../components/popups/information/information-popup.component';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { InformationPopupComponent } from '../components/popups/information/information-popup.component';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

@@ -1,5 +1,5 @@
-import {Component, Input, HostListener} from '@angular/core';
-import {LoaderStatus} from 'src/app/common/loader-status';
+import { Component, HostListener, Input } from '@angular/core';
+import { LoaderStatus } from 'src/app/common/loader-status';
 
 @Component({
 	selector: 'loader',

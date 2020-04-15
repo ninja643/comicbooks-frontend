@@ -1,11 +1,11 @@
-import {Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {finalize} from 'rxjs/operators';
-import {ButtonInfo} from 'src/app/common/button-info';
-import {LoaderStatus} from 'src/app/common/loader-status';
-import {RoutingService} from 'src/app/common/routing.service';
-import {SearchResult} from 'src/app/model/search-results';
-import {ColumnDefinition, SearchParameters} from '../components/search-page/search-page.component';
+import { Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { ButtonInfo } from 'src/app/common/button-info';
+import { LoaderStatus } from 'src/app/common/loader-status';
+import { RoutingService } from 'src/app/common/routing.service';
+import { SearchResult } from 'src/app/model/search-results';
+import { ColumnDefinition, SearchParameters } from '../components/search-page/search-page.component';
 
 export abstract class EntityListPage<Entity extends { id: number }> implements OnInit {
 
@@ -43,7 +43,7 @@ export abstract class EntityListPage<Entity extends { id: number }> implements O
 
 	entityTrackBy = (index: number, entity: Entity): number => {
 		return entity.id;
-	}
+	};
 
 	searchEntities(searchParameters: SearchParameters): void {
 		if (!this.staticMode) {

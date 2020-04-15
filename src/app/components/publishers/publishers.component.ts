@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
-import {EntityListPage} from 'src/app/common/entity-list-page';
-import {RoutingService} from 'src/app/common/routing.service';
-import {Publisher} from 'src/app/model/publisher';
-import {SearchResult} from 'src/app/model/search-results';
-import {PublisherService} from 'src/app/services/publisher.service';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EntityListPage } from 'src/app/common/entity-list-page';
+import { RoutingService } from 'src/app/common/routing.service';
+import { Publisher } from 'src/app/model/publisher';
+import { SearchResult } from 'src/app/model/search-results';
+import { PublisherService } from 'src/app/services/publisher.service';
 
 @Component({
 	templateUrl: 'publishers.component.html'

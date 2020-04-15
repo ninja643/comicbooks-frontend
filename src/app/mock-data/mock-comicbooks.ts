@@ -1,7 +1,7 @@
-import {Comicbook} from '../model/comicbook';
-import {frontPageImageMock} from './attachment';
-import {HEROES1, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7, allHeroes} from './mock-heroes';
-import {PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4} from './mock-publishers';
+import { Comicbook } from '../model/comicbook';
+import { frontPageImageMock } from './attachment';
+import { allHeroes, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from './mock-heroes';
+import { PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4 } from './mock-publishers';
 
 export const COMICBOOKS: Comicbook[] = [
 	{

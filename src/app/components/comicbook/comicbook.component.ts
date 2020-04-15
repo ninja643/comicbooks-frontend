@@ -1,20 +1,20 @@
-import {ChangeDetectorRef, Component, Injector} from '@angular/core';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {Observable, of} from 'rxjs';
-import {finalize, tap, map} from 'rxjs/operators';
-import {EntityPage} from 'src/app/common/entity-page';
-import {RouterLinks} from 'src/app/common/router-links';
-import {RoutingService} from 'src/app/common/routing.service';
-import {Comicbook} from 'src/app/model/comicbook';
-import {Hero} from 'src/app/model/hero';
-import {Publisher} from 'src/app/model/publisher';
-import {ComicbookService} from 'src/app/services/comicbook.service';
-import {FileUploadService} from 'src/app/services/file-upload.service';
-import {HeroService} from 'src/app/services/hero.service';
-import {PublisherService} from 'src/app/services/publisher.service';
-import {Attachment} from 'src/app/model/attachment';
-import {SearchParameters} from '../search-page/search-page.component';
-import {SearchResult} from 'src/app/model/search-results';
+import { ChangeDetectorRef, Component, Injector } from '@angular/core';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
+import { EntityPage } from 'src/app/common/entity-page';
+import { RouterLinks } from 'src/app/common/router-links';
+import { RoutingService } from 'src/app/common/routing.service';
+import { Comicbook } from 'src/app/model/comicbook';
+import { Hero } from 'src/app/model/hero';
+import { Publisher } from 'src/app/model/publisher';
+import { ComicbookService } from 'src/app/services/comicbook.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { HeroService } from 'src/app/services/hero.service';
+import { PublisherService } from 'src/app/services/publisher.service';
+import { Attachment } from 'src/app/model/attachment';
+import { SearchParameters } from '../search-page/search-page.component';
+import { SearchResult } from 'src/app/model/search-results';
 
 @Component({
 	templateUrl: 'comicbook.component.html',

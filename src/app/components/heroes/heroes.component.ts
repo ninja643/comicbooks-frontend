@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
-import {EntityListPage} from 'src/app/common/entity-list-page';
-import {RoutingService} from 'src/app/common/routing.service';
-import {Hero} from 'src/app/model/hero';
-import {SearchResult} from 'src/app/model/search-results';
-import {HeroService} from 'src/app/services/hero.service';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EntityListPage } from 'src/app/common/entity-list-page';
+import { RoutingService } from 'src/app/common/routing.service';
+import { Hero } from 'src/app/model/hero';
+import { SearchResult } from 'src/app/model/search-results';
+import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
 	templateUrl: 'heroes.component.html'

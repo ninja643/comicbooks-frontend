@@ -1,5 +1,5 @@
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Component, forwardRef, Input, OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 
 export class SelectorItem {
 	constructor(public value: any, public selected?: boolean) {

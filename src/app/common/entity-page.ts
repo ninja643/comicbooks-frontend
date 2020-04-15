@@ -1,13 +1,13 @@
-import {Location} from '@angular/common';
-import {Injector, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs';
-import {finalize} from 'rxjs/operators';
-import {LoaderStatus} from 'src/app/common/loader-status';
-import {ConfirmationPopupComponent} from '../components/popups/confirmation/confirmation-popup.component';
-import {PopupResponseEnum} from '../components/popups/popup-response';
+import { Location } from '@angular/common';
+import { Injector, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoaderStatus } from 'src/app/common/loader-status';
+import { ConfirmationPopupComponent } from '../components/popups/confirmation/confirmation-popup.component';
+import { PopupResponseEnum } from '../components/popups/popup-response';
 
 export abstract class EntityPage<Entity extends { id: number }> implements OnInit {
 

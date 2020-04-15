@@ -1,5 +1,5 @@
-import {Publisher} from '../model/publisher';
-import {frontPageImageMock} from './attachment';
+import { Publisher } from '../model/publisher';
+import { frontPageImageMock } from './attachment';
 
 export const PUBLISHER1: Publisher = {
 	id: 1,

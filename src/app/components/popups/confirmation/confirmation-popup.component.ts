@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {PopupResponseEnum} from '../popup-response';
+import { Component } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { PopupResponseEnum } from '../popup-response';
 
 @Component({
 	templateUrl: 'confirmation-popup.component.html',

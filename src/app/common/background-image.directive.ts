@@ -1,4 +1,4 @@
-import {Directive, TemplateRef, Input, HostBinding} from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
 	selector: '[background-image]'

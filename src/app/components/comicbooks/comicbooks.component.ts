@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
-import {EntityListPage} from 'src/app/common/entity-list-page';
-import {RoutingService} from 'src/app/common/routing.service';
-import {Comicbook} from 'src/app/model/comicbook';
-import {SearchResult} from 'src/app/model/search-results';
-import {ComicbookService} from 'src/app/services/comicbook.service';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EntityListPage } from 'src/app/common/entity-list-page';
+import { RoutingService } from 'src/app/common/routing.service';
+import { Comicbook } from 'src/app/model/comicbook';
+import { SearchResult } from 'src/app/model/search-results';
+import { ComicbookService } from 'src/app/services/comicbook.service';
 
 @Component({
 	selector: 'comicbooks',

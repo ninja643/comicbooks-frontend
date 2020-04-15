@@ -1,5 +1,5 @@
-import {Hero} from '../model/hero';
-import {frontPageImageMock} from './attachment';
+import { Hero } from '../model/hero';
+import { frontPageImageMock } from './attachment';
 
 export const HEROES1: Hero[] = [
 	{
