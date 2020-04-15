@@ -1,4 +1,4 @@
 export interface ButtonInfo {
-    text: string;
-    execute: () => void;
+	text: string;
+	execute: () => void;
 }

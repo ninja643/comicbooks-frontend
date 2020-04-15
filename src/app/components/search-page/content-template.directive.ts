@@ -1,12 +1,13 @@
-import { Directive, TemplateRef, Input } from '@angular/core';
+import {Directive, TemplateRef, Input} from '@angular/core';
 
 @Directive({
-    selector: '[content-template]'
-  })
-  export class ContentTemplate  {
+	selector: '[content-template]'
+})
 
-    @Input('content-template') columnId: string;
-      
-    constructor(public templateRef: TemplateRef<any>) {}
+export class ContentTemplateDirective {
 
-  }
+	@Input('content-template') columnId: string;
+
+	constructor(public templateRef: TemplateRef<any>) {
+	}
+}

@@ -1,5 +1,5 @@
 export enum PopupResponseEnum {
-    Confirm,
-    Cancel,
-    Close
+	Confirm,
+	Cancel,
+	Close
 }

@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  serviceUrl: 'http://localhost:8080/comicbooks/services/rest/v1/',
+	production: false,
+	serviceUrl: 'http://localhost:8080/comicbooks/services/rest/v1/',
 };
 
 /*

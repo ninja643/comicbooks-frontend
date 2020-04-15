@@ -1,19 +1,19 @@
-import { Component, Input, HostListener } from '@angular/core';
-import { LoaderStatus } from 'src/app/common/loader-status';
+import {Component, Input, HostListener} from '@angular/core';
+import {LoaderStatus} from 'src/app/common/loader-status';
 
 @Component({
-    selector: 'loader',
-    templateUrl: 'loader.component.html',
-    styleUrls: ['loader.component.scss']
+	selector: 'loader',
+	templateUrl: 'loader.component.html',
+	styleUrls: ['loader.component.scss']
 })
 export class LoaderComponent {
 
-    @Input() status: LoaderStatus;
+	@Input() status: LoaderStatus;
 
-    @HostListener('document:keydown', ['$event']) handleKeyboardEvent(event: KeyboardEvent) {
-        if (this.status.isLoaderVisible) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    }
+	@HostListener('document:keydown', ['$event']) handleKeyboardEvent(event: KeyboardEvent) {
+		if (this.status.isLoaderVisible) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+	}
 }
