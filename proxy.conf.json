@@ -1,11 +1,20 @@
 {
-  "/publishers/*": {
-    "target": "http://localhost:8080/comicbooks/services/rest/v1/publishers",
-    "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/publishers" : ""
-    },
-    "logLevel": "debug"
-  }
+	"/publishers/*": {
+		"target": "http://localhost:8080/comicbooks/services/rest/v1/publishers",
+		"secure": false,
+		"changeOrigin": true,
+		"pathRewrite": {
+			"^/publishers": ""
+		},
+		"logLevel": "debug"
+	},
+	"/api/comicbooks/*": {
+		"target": "http://localhost:8080/comicbooks/services/rest/v1/comicbooks",
+		"secure": false,
+		"changeOrigin": true,
+		"pathRewrite": {
+			"^/comicbooks": ""
+		},
+		"logLevel": "debug"
+	}
 }

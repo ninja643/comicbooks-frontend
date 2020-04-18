@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchParameters } from '../components/search-page/search-page.component';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
-import { deleteById, getById, save } from '../mock-data/mock-common';
+import { deleteById, save, getById } from '../mock-data/mock-common';
 import { Comicbook } from '../model/comicbook';
 import { SearchRequest } from '../model/search-request';
 import { SearchResult } from '../model/search-results';
@@ -13,10 +13,9 @@ import { ComicbooksHttpClient } from './comicbooks-http-client';
 })
 export class ComicbookService {
 
-	private url = '/comicbooks';
+	private url = 'comicbooks';
 
-	constructor(
-		private httpClient: ComicbooksHttpClient) {
+	constructor(private httpClient: ComicbooksHttpClient) {
 	}
 
 	getComicbooks(searchParameters: SearchParameters): Observable<SearchResult<Comicbook>> {
@@ -31,16 +30,17 @@ export class ComicbookService {
 				};
 				subscriber.next(t);
 				subscriber.complete();
-			}, 1500);
+			}, 0/*1500*/);
 		});
 
-		const requestBody: SearchRequest = {
-			offset: (searchParameters.page - 1) * searchParameters.pageSize,
-			count: searchParameters.pageSize,
-			filterText: searchParameters.searchText
-		};
-		const url = `${this.url}/search`;
-		return this.httpClient.post<SearchResult<Comicbook>>(url, requestBody);
+		// const requestBody: SearchRequest = {
+		// 	offset: (searchParameters.page - 1) * searchParameters.pageSize,
+		// 	count: searchParameters.pageSize,
+		// 	filterText: searchParameters.searchText
+		// };
+		// const url = `${this.url}`;
+		// console.log('Getting from url: ', url);
+		// return this.httpClient.get<SearchResult<Comicbook>>(url);
 	}
 
 	getComicbook(id: number): Observable<Comicbook> {
@@ -53,11 +53,11 @@ export class ComicbookService {
 					subscriber.error('gfgf');
 				}
 				subscriber.complete();
-			}, 1500);
+			}, 0/*1500*/);
 		});
-		const url = `${this.url}/${id}`;
-
-		return this.httpClient.get<Comicbook>(url);
+		// const url = `${this.url}/${id}`;
+		// console.log('URL: ', url);
+		// return this.httpClient.get<Comicbook>(url);
 	}
 
 	saveComicbook(comicbook: Comicbook): Observable<Comicbook> {

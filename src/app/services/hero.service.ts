@@ -16,8 +16,7 @@ export class HeroService {
 
 	private url = '/heroes';
 
-	constructor(
-		private httpClient: ComicbooksHttpClient) {
+	constructor(private httpClient: ComicbooksHttpClient) {
 
 		// TODO remove
 		allHeroes.forEach(hero => {
@@ -44,7 +43,7 @@ export class HeroService {
 			count: searchParameters.pageSize,
 			filterText: searchParameters.searchText
 		};
-		const url: string = `${this.url}/search`;
+		const url = `${this.url}/search`;
 		return this.httpClient.post<SearchResult<Hero>>(url, requestBody);
 	}
 

@@ -1,14 +1,14 @@
 import { Comicbook } from '../model/comicbook';
-import { frontPageImageMock } from './attachment';
+import { frontPageImageMock, frontPageZS13 } from './attachment';
 import { allHeroes, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from './mock-heroes';
 import { PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4 } from './mock-publishers';
 
 export const COMICBOOKS: Comicbook[] = [
 	{
 		id: 1,
-		number: 1,
-		title: 'Comicbook 1',
-		frontPageImage: frontPageImageMock,
+		number: 13,
+		title: 'Nasilje u Darkvudu',
+		frontPageImage: frontPageZS13,
 		publisher: PUBLISHER1,
 		heroes: allHeroes
 	},

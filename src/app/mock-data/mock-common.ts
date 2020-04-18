@@ -16,6 +16,6 @@ export function save<T>(collection: T[], toSave: T): T {
 }
 
 export function deleteById<T>(collection: T[], id: number): void {
-	const existingIndex: number = collection.findIndex(x => x.id === id);
+	const existingIndex: number = collection.findIndex(x => x['id'] === id);
 	collection.splice(existingIndex, 1);
 }

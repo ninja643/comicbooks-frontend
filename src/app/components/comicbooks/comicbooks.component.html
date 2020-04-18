@@ -1,6 +1,13 @@
-<search-page [staticMode]="staticMode" [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
-    [columns]="tableColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
-    [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
+<search-page [staticMode]="staticMode"
+             [searchEnabled]="true"
+             [items]="entities"
+             [rowClickedFn]="navigateToEntity"
+             [itemTrackBy]="entityTrackBy"
+             [columns]="tableColumns"
+             [showLoader]="searchPageLoaderStatus.isLoaderVisible"
+             [addNewItemButtonInfo]="addNewEntityButtonInfo"
+             [searchParameters]="searchParameters"
+             (searchParametersChange)="searchEntities($event)">
     <ng-template content-template="title" let-comicbook>
         <div class="d-flex align-items-center">
             <div class="search-list-image mr-2" [background-image]="comicbook.frontPageImage?.url"></div>

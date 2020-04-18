@@ -43,7 +43,7 @@ export abstract class EntityListPage<Entity extends { id: number }> implements O
 
 	entityTrackBy = (index: number, entity: Entity): number => {
 		return entity.id;
-	};
+	}
 
 	searchEntities(searchParameters: SearchParameters): void {
 		if (!this.staticMode) {

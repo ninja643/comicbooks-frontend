@@ -51,7 +51,7 @@ export abstract class EntityPage<Entity extends { id: number }> implements OnIni
 	ngOnInit(): void {
 		this.initialize();
 		if (this.router.url.includes(this.newEntityRoute)) {
-			this.setEntity(<Entity> {});
+			this.setEntity({} as Entity);
 		} else {
 			this.activatedRoute.params.subscribe(params => {
 				const entityId: number = params[this.entityIdQueryParam];
