@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
 import { Attachment } from '../model/attachment';
-import { frontPageImageMock } from '../mock-data/attachment';
+import { frontPageZS13 } from '../mock-data/attachment';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,7 +20,7 @@ export class FileUploadService {
 		return new Observable(subscriber => {
 			setTimeout(() => {
 				subscriber.next({
-					...frontPageImageMock,
+					...frontPageZS13,
 					url: todo
 				});
 				subscriber.complete();

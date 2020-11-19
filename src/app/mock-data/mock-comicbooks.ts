@@ -1,5 +1,5 @@
 import { Comicbook } from '../model/comicbook';
-import { frontPageImageMock, frontPageZS13 } from './attachment';
+import { frontPageZS13 } from './attachment';
 import { allHeroes, HEROES2, HEROES3, HEROES4, HEROES5, HEROES6, HEROES7 } from './mock-heroes';
 import { PUBLISHER1, PUBLISHER2, PUBLISHER3, PUBLISHER4 } from './mock-publishers';
 
