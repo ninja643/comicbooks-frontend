@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchParameters } from '../components/search-page/search-page.component';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
 import { deleteById, getById, save } from '../mock-data/mock-common';
 import { allHeroes } from '../mock-data/mock-heroes';
@@ -8,6 +7,7 @@ import { Hero } from '../model/hero';
 import { SearchRequest } from '../model/search-request';
 import { SearchResult } from '../model/search-results';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
+import { SearchParameters } from '../common/entity-list-page';
 
 @Injectable({
 	providedIn: 'root'

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchParameters } from '../components/search-page/search-page.component';
 import { COMICBOOKS } from '../mock-data/mock-comicbooks';
 import { deleteById, save, getById } from '../mock-data/mock-common';
 import { Comicbook } from '../model/comicbook';
 import { SearchRequest } from '../model/search-request';
 import { SearchResult } from '../model/search-results';
 import { ComicbooksHttpClient } from './comicbooks-http-client';
+import { SearchParameters } from '../common/entity-list-page';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,7 +24,7 @@ export class ComicbookService {
 				const t = {
 					offset: (searchParameters.page - 1) * searchParameters.pageSize,
 					count: searchParameters.pageSize,
-					totalCount: searchParameters.collectionSize,
+					totalCount: 100,
 					searchText: searchParameters.searchText,
 					items: COMICBOOKS.slice().filter(x => x.title.toLowerCase().includes(searchParameters.searchText.toLowerCase()))
 				};

@@ -1,0 +1,15 @@
+@import "variables";
+
+:host {
+    .search-page-item {
+        height: 200px;
+    }
+
+    .default-item-template:hover {
+        cursor: pointer;
+        
+        .item-default-name {
+            text-decoration: underline;
+        }
+    }
+}

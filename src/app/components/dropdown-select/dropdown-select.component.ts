@@ -1,5 +1,6 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, forwardRef, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { getObjectAtPath } from 'src/app/common/utils';
 
 export class SelectorItem {
 	constructor(public value: any, public selected?: boolean) {
@@ -77,16 +78,7 @@ export class DropdownSelectComponent implements ControlValueAccessor, OnChanges 
 	}
 
 	getDisplayText = (item: any): string => {
-		if (this.displayPath) {
-			const segments: string[] = this.displayPath.split('.');
-			let itemProperty = item;
-			try {
-				segments.forEach(segment => itemProperty = itemProperty[segment]);
-				return itemProperty;
-			} catch (error) {
-			}
-		}
-		return '';
+		return getObjectAtPath(item, this.displayPath);
 	};
 
 	getButtonDisplayText = (selectedValue: any): string => {

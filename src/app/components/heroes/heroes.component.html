@@ -1,10 +1,28 @@
-<search-page [searchEnabled]="true" [items]="entities" [rowClickedFn]="navigateToEntity" [itemTrackBy]="entityTrackBy"
-    [columns]="tableColumns" [showLoader]="searchPageLoaderStatus.isLoaderVisible"
-    [addNewItemButtonInfo]="addNewEntityButtonInfo" [searchParameters]="searchParameters" (searchParametersChange)="searchEntities($event)">
-    <ng-template content-template="name" let-hero>
-        <div class="d-flex align-items-center">
-            <div class="search-list-image mr-2" [background-image]="hero.picture?.url"></div>
-            {{hero.name}}
+<loader [status]="loaderStatus">
+    <div *ngIf="!staticMode" class="d-flex justify-content-end">
+        <div class="input-group mb-3 flex-grow-1">
+            <ng-container>
+                <input type="text" class="form-control" [(ngModel)]="searchText" [placeholder]="'Search'"
+                    (keyup.enter)="searchByText()">
+                <div class="input-group-append" (click)="searchByText()">
+                    <button class="input-group-text btn">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+            </ng-container>
         </div>
-    </ng-template>
-</search-page>
+        <div *ngIf="addNewEntityButtonInfo" class="ml-3">
+            <button (click)="addNewEntityButtonInfo.execute()"
+                class="btn btn-primary text-nowrap">{{addNewEntityButtonInfo.text}}</button>
+        </div>
+    </div>
+    <search-page [items]="entities"
+                 [itemPicturePath]="'picture.url'"
+                 [itemNamePath]="'name'"
+                 [itemTrackBy]="entityTrackBy"
+                 (itemClicked)="navigateToEntity($event)">
+    </search-page>
+    <ngb-pagination *ngIf="!staticMode" class="d-flex justify-content-center" [page]="searchParameters.page"
+            [pageSize]="searchParameters.pageSize" [collectionSize]="searchParameters.collectionSize"
+            (pageChange)="changePage($event)"></ngb-pagination>
+</loader>

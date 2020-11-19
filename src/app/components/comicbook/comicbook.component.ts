@@ -13,8 +13,8 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { HeroService } from 'src/app/services/hero.service';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { Attachment } from 'src/app/model/attachment';
-import { SearchParameters } from '../search-page/search-page.component';
 import { SearchResult } from 'src/app/model/search-results';
+import { SearchParameters } from 'src/app/common/entity-list-page';
 
 @Component({
 	templateUrl: 'comicbook.component.html',
@@ -96,10 +96,7 @@ export class ComicbookComponent extends EntityPage<Comicbook> {
 				if (file) {
 					const reader = new FileReader();
 					reader.readAsDataURL(file);
-					reader.onload = () => {
-						this.frontPageImage = <string> reader.result;
-						this.cdRef.markForCheck();
-					};
+					reader.onload = () => this.frontPageImage = <string> reader.result;
 				}
 			}
 		});

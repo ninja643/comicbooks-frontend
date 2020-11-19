@@ -14,9 +14,9 @@ import { ComicbooksComponent } from './components/comicbooks/comicbooks.componen
 import { ComicbookComponent } from './components/comicbook/comicbook.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { PublisherComponent } from './components/publisher/publisher.component';
-import { SearchPageComponent } from './components/search-page/search-page.component';
-import { ContentTemplateDirective } from './components/search-page/content-template.directive';
-import { HeaderTemplateDirective } from './components/search-page/header-template.directive';
+import { CustomTableComponent } from './components/table/custom-table.component';
+import { ContentTemplateDirective } from './components/table/content-template.directive';
+import { HeaderTemplateDirective } from './components/table/header-template.directive';
 import { ExecutePipe } from './common/execute.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BackgroundImageDirective } from './common/background-image.directive';
@@ -26,6 +26,8 @@ import { FileInputComponent } from './components/file-input/file-input.component
 import { InformationPopupComponent } from './components/popups/information/information-popup.component';
 import { ConfirmationPopupComponent } from './components/popups/confirmation/confirmation-popup.component';
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
+import { ItemTemplateDirective } from './components/search-page/item-template.directive';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
 	declarations: [
@@ -38,7 +40,7 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
 		HeroComponent,
 		PublishersComponent,
 		PublisherComponent,
-		SearchPageComponent,
+		CustomTableComponent,
 		HeaderTemplateDirective,
 		ContentTemplateDirective,
 		ExecutePipe,
@@ -47,7 +49,9 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
 		DropdownSelectComponent,
 		FileInputComponent,
 		InformationPopupComponent,
-		ConfirmationPopupComponent
+		ConfirmationPopupComponent,
+		ItemTemplateDirective,
+		SearchPageComponent
 	],
 	imports: [
 		BrowserModule,

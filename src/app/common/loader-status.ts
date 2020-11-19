@@ -1,21 +1,21 @@
 export class LoaderStatus {
+	isLoaderVisible = false;
+
 	constructor(private counter: number = 0) {
 
 	}
 
-	get isLoaderVisible(): boolean {
-		return !!this.counter;
-	}
-
 	showLoader(): void {
 		this.counter++;
+		this.determineIfLoaderIsVisible();
 	}
 
 	hideLoader(): void {
 		this.counter--;
+		this.determineIfLoaderIsVisible();
 	}
 
-	updateVisibility(visible: boolean): void {
-		this.counter += visible ? 1 : -1;
+	private determineIfLoaderIsVisible(): void {
+		this.isLoaderVisible = !!this.counter;
 	}
 }

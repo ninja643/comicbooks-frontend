@@ -5,6 +5,7 @@ import { RoutingService } from 'src/app/common/routing.service';
 import { Comicbook } from 'src/app/model/comicbook';
 import { SearchResult } from 'src/app/model/search-results';
 import { ComicbookService } from 'src/app/services/comicbook.service';
+import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'comicbooks',
@@ -13,8 +14,9 @@ import { ComicbookService } from 'src/app/services/comicbook.service';
 export class ComicbooksComponent extends EntityListPage<Comicbook> {
 
 	constructor(routingService: RoutingService,
+				activatedRoute: ActivatedRoute,
 				protected comicbookService: ComicbookService) {
-		super(routingService,
+		super(routingService, activatedRoute,
 			() => (this.routingService.navigateToNewComicbook()),
 			(comicbook: Comicbook) => (this.routingService.navigateToComicbook(comicbook)),
 			'comicbook');
@@ -24,25 +26,4 @@ export class ComicbooksComponent extends EntityListPage<Comicbook> {
 		return this.comicbookService.getComicbooks(this.searchParameters);
 	}
 
-	protected generateTableColumns(): void {
-		this.tableColumns = [
-			{
-				id: 'title',
-				headerText: 'Title'
-			},
-			{
-				id: 'number',
-				headerText: 'Number'
-			},
-			{
-				id: 'publisher',
-				headerText: 'Publisher',
-				contentDisplayPath: 'publisher.name'
-			},
-			{
-				id: 'id',
-				headerText: 'Id'
-			}
-		];
-	}
 }

@@ -1,56 +1,13 @@
-<loader [status]="loaderStatus">
-    <div *ngIf="!staticMode && (searchEnabled || addNewItemButtonInfo)" class="d-flex justify-content-end">
-        <div class="input-group mb-3 flex-grow-1">
-            <ng-container *ngIf="searchEnabled">
-                <input type="text" class="form-control" [(ngModel)]="searchText" [placeholder]="searchPlaceholderText"
-                    (keyup.enter)="searchByText()">
-                <div class="input-group-append" (click)="searchByText()">
-                    <button class="input-group-text btn">
-                        <i class="material-icons">search</i>
-                    </button>
-                </div>
-            </ng-container>
-        </div>
-        <div *ngIf="addNewItemButtonInfo" class="ml-3">
-            <button (click)="addNewItemButtonInfo.execute()"
-                class="btn btn-primary text-nowrap">{{addNewItemButtonInfo.text}}</button>
-        </div>
+<div class="d-flex flex-wrap">
+    <div *ngFor="let item of items" class="col-6 col-md-4 col-lg-3 search-page-item">
+        <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate.templateRef : defaultTemplate"></ng-container>
+
+        <ng-template #defaultTemplate>
+            <div class="default-item-template d-flex flex-column align-items-center h-100 w-100 p-4" (click)="itemClicked.emit(item)">
+                <div class="search-page-image flex-grow-1 w-100" [background-image]="getObjectAtPath | execute : item : itemPicturePath"></div>
+                <div class="item-default-name flex-grow-0 w-100 mt-1 text-center">{{ getObjectAtPath | execute : item : itemNamePath }}</div>
+            </div>
+        </ng-template>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th *ngFor="let column of columns; trackBy: columnTrackBy" scope="col">
-                    <ng-container
-                        *ngTemplateOutlet="!column.headerTemplate ? defaultHeaderTemplate : column.headerTemplate; context: {$implicit: column}">
-                    </ng-container>
-                    <ng-template #defaultHeaderTemplate>
-                        {{column.headerText}}
-                    </ng-template>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items; trackBy: itemTrackBy" (click)="onRowClicked(item)"
-                [class.cursor-pointer]="rowClickedFn">
-                <td *ngFor="let column of columns; trackBy: columnTrackBy" class="align-middle"
-                    (click)="onCellClicked($event, item, column)" [class.cursor-pointer]="column.onContentCellClicked">
-                    <ng-container
-                        *ngTemplateOutlet="!column.contentTemplate ? defaultContentTemplate : column.contentTemplate; context: {$implicit: item}">
-                    </ng-container>
-                    <ng-template #defaultContentTemplate>
-                        {{
-                        column.contentDisplayFn ? 
-                        (column.contentDisplayFn | execute : item) 
-                        : column.contentDisplayPath ? 
-                            (getPropertyOnPath | execute : item : column.contentDisplayPath) 
-                            : item[column.id]
-                    }}
-                    </ng-template>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <ngb-pagination *ngIf="!staticMode" class="d-flex justify-content-center" [page]="searchParameters.page"
-        [pageSize]="searchParameters.pageSize" [collectionSize]="searchParameters.collectionSize"
-        (pageChange)="changePage($event)"></ngb-pagination>
-</loader>
+
+</div>

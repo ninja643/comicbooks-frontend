@@ -74,10 +74,7 @@ export class HeroComponent extends EntityPage<Hero> {
 				if (file) {
 					const reader = new FileReader();
 					reader.readAsDataURL(file);
-					reader.onload = () => {
-						this.shownPicture = reader.result as string;
-						this.cdRef.markForCheck();
-					};
+					reader.onload = () => this.shownPicture = reader.result as string;
 				}
 			}
 		});
